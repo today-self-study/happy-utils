@@ -1,1 +1,70 @@
 /* CSS 스타일은 여기에 작성합니다. */ 
+
+/* General Body Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* Header Styles */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1.5rem 0;
+    text-align: center;
+    border-bottom: 4px solid #5c67f2;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin: 0.5rem 0 0;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+/* Main Content Styles */
+main {
+    width: 90%;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Tool Section Styles */
+.tool-section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    padding: 1.5rem 2rem;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.tool-section:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.tool-section h2 {
+    margin-top: 0;
+    color: #5c67f2;
+    border-bottom: 2px solid #eef;
+    padding-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: #333;
+    color: #aaa;
+    font-size: 0.9rem;
+} 
