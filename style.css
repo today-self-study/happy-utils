@@ -83,6 +83,11 @@ textarea {
     font-size: 1rem;
 }
 
+input[readonly] {
+    background-color: #e9ecef;
+    cursor: default;
+}
+
 textarea {
     min-height: 120px;
     resize: vertical;
@@ -113,38 +118,46 @@ button:hover {
     font-family: 'Courier New', Courier, monospace;
     white-space: pre-wrap;
     word-wrap: break-word;
+    color: red; /* For error messages */
 }
 
 /* Epoch Converter Specific Styles */
-.epoch-current {
+.current-time-display h3, .converter-group h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    color: #333;
+}
+
+.time-group, .converter-group {
+    margin-bottom: 1rem;
+}
+
+.output-group {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #eef;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    margin-bottom: 1.5rem;
 }
 
-.epoch-current p {
-    margin: 0;
-    font-size: 1.1rem;
+.output-group input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    flex-grow: 1;
 }
 
-#refresh-epoch {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+.copy-btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 80px; /* Fixed width for copy buttons */
 }
 
-.converter-group {
-    display: grid;
-    gap: 1rem;
-    align-items: center;
+.section-divider {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 2rem 0;
 }
 
 #to-date-btn, #to-epoch-btn {
     width: 100%;
-    justify-self: center;
+    margin-top: 0.5rem;
 }
 
 /* Button Group Styles */
