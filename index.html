@@ -16,7 +16,25 @@
         <section id="epoch-converter" class="tool-section">
             <h2>Epoch & Unix Timestamp Converter</h2>
             <div class="tool-content">
-                <!-- Epoch Converter content will go here -->
+                <div class="epoch-current">
+                    <p><strong>Current Epoch Time:</strong> <span id="current-epoch"></span></p>
+                    <button id="refresh-epoch">Refresh</button>
+                </div>
+                <div class="converter-group">
+                    <div class="form-group">
+                        <label for="epoch-input">Epoch Timestamp</label>
+                        <input type="number" id="epoch-input" placeholder="Enter Epoch time">
+                    </div>
+                    <button id="to-date-btn">&darr; Convert to Date &darr;</button>
+                    <div class="form-group">
+                        <label for="date-input">Human-Readable Date (UTC)</label>
+                        <input type="text" id="date-input" placeholder="e.g., 2023-10-27T10:00:00Z">
+                    </div>
+                    <button id="to-epoch-btn">&uarr; Convert to Epoch &uarr;</button>
+                </div>
+                <div id="epoch-result" class="result-box">
+                    Your converted result will appear here.
+                </div>
             </div>
         </section>
 
