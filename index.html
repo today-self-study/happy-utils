@@ -41,7 +41,17 @@
         <section id="url-encoder" class="tool-section">
             <h2>URL Encoder / Decoder</h2>
             <div class="tool-content">
-                <!-- URL Encoder/Decoder content will go here -->
+                <div class="form-group">
+                    <label for="url-input">Text to Encode / Decode</label>
+                    <textarea id="url-input" placeholder="Paste your URL or text here..."></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="url-encode-btn">Encode</button>
+                    <button id="url-decode-btn">Decode</button>
+                    <button id="url-copy-btn">Copy</button>
+                    <button id="url-clear-btn" class="btn-secondary">Clear</button>
+                </div>
+                <div id="url-result" class="result-box" style="display: none;"></div>
             </div>
         </section>
 

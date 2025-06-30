@@ -147,6 +147,25 @@ button:hover {
     justify-self: center;
 }
 
+/* Button Group Styles */
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.button-group button {
+    flex-grow: 1; /* Allow buttons to grow */
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
 /* Footer Styles */
 footer {
     text-align: center;

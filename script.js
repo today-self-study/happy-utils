@@ -57,4 +57,44 @@ document.addEventListener('DOMContentLoaded', () => {
     toDateBtn.addEventListener('click', convertEpochToDate);
     toEpochBtn.addEventListener('click', convertDateToEpoch);
 
+
+    // --- URL Encoder/Decoder ---
+    const urlInput = document.getElementById('url-input');
+    const urlEncodeBtn = document.getElementById('url-encode-btn');
+    const urlDecodeBtn = document.getElementById('url-decode-btn');
+    const urlCopyBtn = document.getElementById('url-copy-btn');
+    const urlClearBtn = document.getElementById('url-clear-btn');
+    const urlResultBox = document.getElementById('url-result');
+
+    const showURLMessage = (message, isError = false) => {
+        urlResultBox.textContent = message;
+        urlResultBox.style.color = isError ? 'red' : 'green';
+        urlResultBox.style.display = 'block';
+        setTimeout(() => {
+            urlResultBox.style.display = 'none';
+        }, 3000);
+    };
+
+    urlEncodeBtn.addEventListener('click', () => {
+        urlInput.value = encodeURIComponent(urlInput.value);
+    });
+
+    urlDecodeBtn.addEventListener('click', () => {
+        try {
+            urlInput.value = decodeURIComponent(urlInput.value);
+        } catch (e) {
+            showURLMessage('Error: The input string is not a valid encoded URI.', true);
+        }
+    });
+
+    urlCopyBtn.addEventListener('click', () => {
+        if (!urlInput.value) return;
+        navigator.clipboard.writeText(urlInput.value)
+            .then(() => showURLMessage('Copied to clipboard!'))
+            .catch(() => showURLMessage('Failed to copy.', true));
+    });
+
+    urlClearBtn.addEventListener('click', () => {
+        urlInput.value = '';
+    });
 }); 
