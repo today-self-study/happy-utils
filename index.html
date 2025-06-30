@@ -58,7 +58,16 @@
         <section id="json-viewer" class="tool-section">
             <h2>JSON Formatter & Viewer</h2>
             <div class="tool-content">
-                <!-- JSON Viewer content will go here -->
+                <div class="form-group">
+                    <label for="json-input">Paste your JSON here</label>
+                    <textarea id="json-input" placeholder='{ "hello": "world" }'></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="json-format-btn">Format / Beautify</button>
+                    <button id="json-copy-btn">Copy</button>
+                    <button id="json-clear-btn" class="btn-secondary">Clear</button>
+                </div>
+                <pre id="json-output" class="result-box"></pre>
             </div>
         </section>
     </main>

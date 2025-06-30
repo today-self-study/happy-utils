@@ -97,4 +97,37 @@ document.addEventListener('DOMContentLoaded', () => {
     urlClearBtn.addEventListener('click', () => {
         urlInput.value = '';
     });
+
+    // --- JSON Formatter ---
+    const jsonInput = document.getElementById('json-input');
+    const jsonFormatBtn = document.getElementById('json-format-btn');
+    const jsonCopyBtn = document.getElementById('json-copy-btn');
+    const jsonClearBtn = document.getElementById('json-clear-btn');
+    const jsonOutput = document.getElementById('json-output');
+
+    jsonFormatBtn.addEventListener('click', () => {
+        try {
+            const jsonObj = JSON.parse(jsonInput.value);
+            jsonOutput.textContent = JSON.stringify(jsonObj, null, 4);
+            jsonOutput.style.color = '#333';
+        } catch (e) {
+            jsonOutput.textContent = `Error: Invalid JSON.\n${e.message}`;
+            jsonOutput.style.color = 'red';
+        }
+    });
+
+    jsonCopyBtn.addEventListener('click', () => {
+        if (!jsonOutput.textContent || jsonOutput.style.color === 'red') {
+            // Do not copy if there is no content or if it's an error message
+            return;
+        }
+        navigator.clipboard.writeText(jsonOutput.textContent)
+            .then(() => showURLMessage('Formatted JSON copied!')) // Re-using the message function
+            .catch(() => showURLMessage('Failed to copy.', true));
+    });
+
+    jsonClearBtn.addEventListener('click', () => {
+        jsonInput.value = '';
+        jsonOutput.textContent = '';
+    });
 }); 
