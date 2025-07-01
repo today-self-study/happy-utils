@@ -85,9 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(() => {
                         const originalText = button.textContent;
                         button.textContent = 'Copied!';
+                        button.classList.add('copied');
                         setTimeout(() => {
                             button.textContent = originalText;
-                        }, 1500);
+                            button.classList.remove('copied');
+                        }, 1200);
                     })
                     .catch(err => console.error('Failed to copy: ', err));
             }
@@ -98,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlInput = document.getElementById('url-input');
     const urlEncodeBtn = document.getElementById('url-encode-btn');
     const urlDecodeBtn = document.getElementById('url-decode-btn');
-    const urlCopyBtn = document.getElementById('url-copy-btn');
     const urlClearBtn = document.getElementById('url-clear-btn');
     const urlResultBox = document.getElementById('url-result');
 
@@ -114,13 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    urlCopyBtn.addEventListener('click', () => {
-        if (!urlInput.value) return;
-        navigator.clipboard.writeText(urlInput.value)
-            .then(() => showMessage(urlResultBox, 'Copied to clipboard!'))
-            .catch(() => showMessage(urlResultBox, 'Failed to copy.', true));
-    });
-
     urlClearBtn.addEventListener('click', () => {
         urlInput.value = '';
     });
@@ -128,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- JSON Formatter ---
     const jsonInput = document.getElementById('json-input');
     const jsonFormatBtn = document.getElementById('json-format-btn');
-    const jsonCopyBtn = document.getElementById('json-copy-btn');
     const jsonClearBtn = document.getElementById('json-clear-btn');
     const jsonOutput = document.getElementById('json-output');
 
@@ -141,16 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
             jsonOutput.textContent = `Error: Invalid JSON.\n${e.message}`;
             jsonOutput.style.color = 'red';
         }
-    });
-
-    jsonCopyBtn.addEventListener('click', () => {
-        if (!jsonOutput.textContent || jsonOutput.style.color === 'red') {
-            // Do not copy if there is no content or if it's an error message
-            return;
-        }
-        navigator.clipboard.writeText(jsonOutput.textContent)
-            .then(() => showMessage(jsonOutput, 'Formatted JSON copied!')) // Re-using the message function
-            .catch(() => showMessage(jsonOutput, 'Failed to copy.', true));
     });
 
     jsonClearBtn.addEventListener('click', () => {

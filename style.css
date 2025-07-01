@@ -1,91 +1,108 @@
 /* CSS 스타일은 여기에 작성합니다. */ 
 
-/* General Body Styles */
+/* Geek/Dark Theme Redesign */
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.6;
+    font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Liberation Mono', monospace;
+    background: #151515;
+    color: #e0e0e0;
     margin: 0;
     padding: 0;
-    background-color: #f4f7f6;
-    color: #333;
+    min-height: 100vh;
+    letter-spacing: 0.01em;
 }
 
-/* Header Styles */
 header {
-    background-color: #333;
+    background: none;
     color: #fff;
-    padding: 1.5rem 0;
     text-align: center;
-    border-bottom: 4px solid #5c67f2;
+    padding: 2.5rem 0 1.5rem 0;
+    border-bottom: 1.5px solid #222;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2.5rem;
+    font-size: 2.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin: 0 0 0.5rem 0;
+    font-family: inherit;
 }
 
 header p {
-    margin: 0.5rem 0 0;
+    color: #888;
     font-size: 1.1rem;
-    color: #ccc;
+    margin: 0;
 }
 
-/* Main Content Styles */
 main {
-    width: 90%;
-    max-width: 960px;
-    margin: 2rem auto;
+    width: 100%;
+    max-width: 900px;
+    margin: 2.5rem auto 0 auto;
     padding: 0 1rem;
 }
 
-/* Tool Section Styles */
 .tool-section {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-    padding: 1.5rem 2rem;
-    transition: box-shadow 0.3s ease-in-out;
+    background: #18191a;
+    border: 1.5px solid #232323;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.18);
+    margin-bottom: 2.2rem;
+    padding: 2rem 2.2rem 1.5rem 2.2rem;
+    transition: box-shadow 0.2s;
+    position: relative;
 }
 
 .tool-section:hover {
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.28);
+    border-color: #444;
 }
 
 .tool-section h2 {
-    margin-top: 0;
-    color: #5c67f2;
-    border-bottom: 2px solid #eef;
+    color: #ffde59;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 1px solid #232323;
     padding-bottom: 0.5rem;
-    font-size: 1.8rem;
-}
-
-/* Form & Input Styles */
-.form-group {
-    margin-bottom: 1rem;
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.08em;
 }
 
 .form-group label {
+    color: #ffde59;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
     display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #555;
+    font-size: 1rem;
 }
 
 input[type="text"],
 input[type="number"],
 textarea {
     width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box; /* Important for 100% width */
+    padding: 0.7rem 1rem;
+    background: #232323;
+    color: #e0e0e0;
+    border: 1.5px solid #333;
+    border-radius: 6px;
     font-size: 1rem;
+    font-family: inherit;
+    margin-bottom: 0.5rem;
+    transition: border 0.2s, background 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #ffde59;
+    background: #232323;
 }
 
 input[readonly] {
-    background-color: #e9ecef;
-    cursor: default;
+    background: #18191a;
+    color: #bdbdbd;
+    border-color: #232323;
 }
 
 textarea {
@@ -94,31 +111,109 @@ textarea {
 }
 
 button {
-    background-color: #5c67f2;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 4px;
-    cursor: pointer;
+    background: #232323;
+    color: #ffde59;
+    border: 1.5px solid #333;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
     font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.2s;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s, border 0.18s;
+    position: relative;
+    min-width: 80px;
+    text-align: center;
+    letter-spacing: 0.04em;
 }
 
-button:hover {
-    background-color: #4a54e1;
+button:hover, button.copied {
+    background: #ffde59;
+    color: #232323;
+    border-color: #ffde59;
 }
 
-.result-box {
+.copy-btn {
+    min-width: 80px;
+    max-width: 100px;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    padding: 0.7rem 0.5rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+    transition: background 0.18s, color 0.18s, border 0.18s;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.copy-btn.copied {
+    color: #232323;
+    background: #ffde59;
+    border-color: #ffde59;
+}
+
+.output-group {
+    display: flex;
+    align-items: center;
+}
+
+.section-divider {
+    border: 0;
+    border-top: 1px solid #232323;
+    margin: 2rem 0;
+}
+
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.button-group button {
+    flex-grow: 1;
+    min-width: 90px;
+}
+
+.btn-secondary {
+    background: #232323;
+    color: #bdbdbd;
+    border-color: #444;
+}
+
+.btn-secondary:hover {
+    background: #444;
+    color: #ffde59;
+    border-color: #ffde59;
+}
+
+.result-box, pre.result-box {
     margin-top: 1rem;
     padding: 1rem;
-    background-color: #eef2f7;
-    border: 1px solid #d0d8e0;
-    border-radius: 4px;
-    font-family: 'Courier New', Courier, monospace;
+    background: #18191a;
+    border: 1.5px solid #232323;
+    border-radius: 6px;
+    font-family: inherit;
+    color: #ff6b6b;
+    font-size: 1rem;
     white-space: pre-wrap;
-    word-wrap: break-word;
-    color: red; /* For error messages */
+    word-break: break-all;
+}
+
+.result-box[style*="display: none"] {
+    padding: 0;
+    border: none;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 0 1.5rem 0;
+    background: none;
+    color: #444;
+    font-size: 0.95rem;
+    border-top: 1.5px solid #232323;
+    margin-top: 3rem;
 }
 
 /* Epoch Converter Specific Styles */
@@ -133,10 +228,6 @@ button:hover {
     margin-bottom: 1rem;
 }
 
-.output-group {
-    display: flex;
-}
-
 .output-group input {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -149,41 +240,7 @@ button:hover {
     width: 80px; /* Fixed width for copy buttons */
 }
 
-.section-divider {
-    border: 0;
-    border-top: 1px solid #ddd;
-    margin: 2rem 0;
-}
-
 #to-date-btn, #to-epoch-btn {
     width: 100%;
     margin-top: 0.5rem;
-}
-
-/* Button Group Styles */
-.button-group {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.button-group button {
-    flex-grow: 1; /* Allow buttons to grow */
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268;
-}
-
-/* Footer Styles */
-footer {
-    text-align: center;
-    padding: 1.5rem 0;
-    background-color: #333;
-    color: #aaa;
-    font-size: 0.9rem;
 } 
