@@ -25,13 +25,6 @@ This collection currently includes the following tools:
     -   Validates JSON and provides clear error messages for invalid input.
     -   Allows copying the formatted JSON with a single click.
 
-4.  **Markdown Viewer**
-    -   Renders markdown text into formatted HTML with live preview.
-    -   Supports GitHub Flavored Markdown (GFM) features.
-    -   Auto-renders as you type (with debounce for performance).
-    -   Copy the generated HTML output to clipboard.
-    -   Dark theme styled preview that matches the site design.
-
 ## 🚀 How to Use
 
 1.  Visit the [Live Demo](https://today-self-study.github.io/happy-utils/).

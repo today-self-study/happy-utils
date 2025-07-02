@@ -36,18 +36,25 @@ header p {
 
 main {
     width: 100%;
-    max-width: 900px;
+    max-width: 480px;
     margin: 2.5rem auto 0 auto;
-    padding: 0 1rem;
+    padding: 0 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .tool-section {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     background: #18191a;
     border: 1.5px solid #232323;
     border-radius: 12px;
     box-shadow: 0 2px 16px 0 rgba(0,0,0,0.18);
     margin-bottom: 2.2rem;
-    padding: 2rem 2.2rem 1.5rem 2.2rem;
+    padding: 2rem 1.2rem 1.5rem 1.2rem;
     transition: box-shadow 0.2s;
     position: relative;
 }
@@ -245,145 +252,61 @@ footer {
     margin-top: 0.5rem;
 }
 
-/* Markdown Viewer Styles */
-.markdown-preview {
-    margin-top: 1rem;
-    padding: 1.5rem;
+.tab-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
     background: #18191a;
-    border: 1.5px solid #232323;
-    border-radius: 6px;
-    color: #e0e0e0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
-    min-height: 100px;
-    overflow-x: auto;
+    border-bottom: 1.5px solid #232323;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 0.5rem 0;
 }
 
-.markdown-preview h1,
-.markdown-preview h2,
-.markdown-preview h3,
-.markdown-preview h4,
-.markdown-preview h5,
-.markdown-preview h6 {
-    color: #ffde59;
-    margin-top: 1.5rem;
-    margin-bottom: 0.8rem;
-    font-weight: 600;
-}
-
-.markdown-preview h1 {
-    font-size: 2rem;
-    border-bottom: 1px solid #333;
-    padding-bottom: 0.5rem;
-}
-
-.markdown-preview h2 {
-    font-size: 1.6rem;
-    border-bottom: 1px solid #333;
-    padding-bottom: 0.3rem;
-}
-
-.markdown-preview h3 {
-    font-size: 1.3rem;
-}
-
-.markdown-preview p {
-    margin-bottom: 1rem;
-    color: #e0e0e0;
-}
-
-.markdown-preview ul,
-.markdown-preview ol {
-    margin: 1rem 0;
-    padding-left: 2rem;
-}
-
-.markdown-preview li {
-    margin-bottom: 0.3rem;
-    color: #e0e0e0;
-}
-
-.markdown-preview strong {
-    color: #ffde59;
-    font-weight: 600;
-}
-
-.markdown-preview em {
-    color: #ffde59;
-    font-style: italic;
-}
-
-.markdown-preview code {
-    background: #232323;
-    color: #ffde59;
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Liberation Mono', monospace;
-    font-size: 0.9rem;
-}
-
-.markdown-preview pre {
-    background: #232323;
-    color: #e0e0e0;
-    padding: 1rem;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1rem 0;
-    border: 1px solid #333;
-}
-
-.markdown-preview pre code {
+.tab-btn {
     background: none;
-    padding: 0;
-    color: inherit;
-}
-
-.markdown-preview blockquote {
-    border-left: 4px solid #ffde59;
-    margin: 1rem 0;
-    padding-left: 1rem;
     color: #bdbdbd;
-    font-style: italic;
-}
-
-.markdown-preview a {
-    color: #ffde59;
-    text-decoration: underline;
-    transition: color 0.2s;
-}
-
-.markdown-preview a:hover {
-    color: #fff;
-}
-
-.markdown-preview table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1rem 0;
-}
-
-.markdown-preview th,
-.markdown-preview td {
-    border: 1px solid #333;
-    padding: 0.5rem;
-    text-align: left;
-}
-
-.markdown-preview th {
-    background: #232323;
-    color: #ffde59;
-    font-weight: 600;
-}
-
-.markdown-preview hr {
     border: none;
-    border-top: 1px solid #333;
-    margin: 2rem 0;
+    font-family: inherit;
+    font-size: 1.08rem;
+    font-weight: 600;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+    outline: none;
+    letter-spacing: 0.04em;
+    border-bottom: 2.5px solid transparent;
 }
 
-.markdown-preview img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 6px;
-    margin: 1rem 0;
+.tab-btn.active {
+    color: #ffde59;
+    background: #232323;
+    border-bottom: 2.5px solid #ffde59;
+    z-index: 2;
+}
+
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+
+@media (min-width: 600px) {
+    main {
+        max-width: 600px;
+        padding: 0 2rem;
+    }
+    .tool-section {
+        padding: 2rem 2.2rem 1.5rem 2.2rem;
+    }
+}
+@media (min-width: 900px) {
+    main {
+        max-width: 900px;
+        padding: 0 3rem;
+    }
 } 
