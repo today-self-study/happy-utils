@@ -140,4 +140,93 @@ document.addEventListener('DOMContentLoaded', () => {
         jsonInput.value = '';
         jsonOutput.textContent = '';
     });
+
+    // --- Markdown Viewer ---
+    const markdownInput = document.getElementById('markdown-input');
+    const markdownRenderBtn = document.getElementById('markdown-render-btn');
+    const markdownCopyHtmlBtn = document.getElementById('markdown-copy-html-btn');
+    const markdownClearBtn = document.getElementById('markdown-clear-btn');
+    const markdownOutput = document.getElementById('markdown-output');
+
+    let renderedHtml = '';
+
+    // Configure marked options for better rendering
+    if (typeof marked !== 'undefined') {
+        marked.setOptions({
+            highlight: function(code, lang) {
+                // Simple syntax highlighting fallback
+                return code;
+            },
+            breaks: true,
+            gfm: true
+        });
+    }
+
+    const renderMarkdown = () => {
+        if (typeof marked === 'undefined') {
+            markdownOutput.innerHTML = '<p style="color: red;">Error: Markdown library failed to load. Please refresh the page.</p>';
+            return;
+        }
+
+        const markdownText = markdownInput.value;
+        
+        if (!markdownText.trim()) {
+            markdownOutput.innerHTML = '<p style="color: #888; font-style: italic;">Enter some markdown text above and click "Render" to see the preview.</p>';
+            renderedHtml = '';
+            return;
+        }
+
+        try {
+            renderedHtml = marked.parse(markdownText);
+            markdownOutput.innerHTML = renderedHtml;
+        } catch (error) {
+            markdownOutput.innerHTML = `<p style="color: red;">Error rendering markdown: ${error.message}</p>`;
+            renderedHtml = '';
+        }
+    };
+
+    const copyMarkdownHtml = () => {
+        if (!renderedHtml) {
+            renderMarkdown();
+        }
+        
+        if (renderedHtml) {
+            navigator.clipboard.writeText(renderedHtml)
+                .then(() => {
+                    const originalText = markdownCopyHtmlBtn.textContent;
+                    markdownCopyHtmlBtn.textContent = 'Copied!';
+                    markdownCopyHtmlBtn.classList.add('copied');
+                    setTimeout(() => {
+                        markdownCopyHtmlBtn.textContent = originalText;
+                        markdownCopyHtmlBtn.classList.remove('copied');
+                    }, 1200);
+                })
+                .catch(err => console.error('Failed to copy HTML: ', err));
+        }
+    };
+
+    const clearMarkdown = () => {
+        markdownInput.value = '';
+        markdownOutput.innerHTML = '';
+        renderedHtml = '';
+    };
+
+    // Event listeners for markdown viewer
+    markdownRenderBtn.addEventListener('click', renderMarkdown);
+    markdownCopyHtmlBtn.addEventListener('click', copyMarkdownHtml);
+    markdownClearBtn.addEventListener('click', clearMarkdown);
+
+    // Auto-render on input (with debounce)
+    let markdownTimeout;
+    markdownInput.addEventListener('input', () => {
+        clearTimeout(markdownTimeout);
+        markdownTimeout = setTimeout(renderMarkdown, 500);
+    });
+
+    // Initial render if there's placeholder content
+    setTimeout(() => {
+        if (markdownInput.value.trim()) {
+            renderMarkdown();
+        }
+    }, 100);
 }); 

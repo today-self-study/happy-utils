@@ -105,12 +105,44 @@
                 <pre id="json-output" class="result-box"></pre>
             </div>
         </section>
+
+        <section id="markdown-viewer" class="tool-section">
+            <h2>Markdown Viewer</h2>
+            <div class="tool-content">
+                <div class="form-group">
+                    <label for="markdown-input">Paste your Markdown here</label>
+                    <textarea id="markdown-input" placeholder="# Hello World
+
+This is a **markdown** example with:
+- Lists
+- *Italic text*
+- [Links](https://example.com)
+- `code snippets`
+
+## Features
+1. Headers
+2. Bold and italic
+3. Code blocks
+
+```javascript
+console.log('Hello from code block!');
+```"></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="markdown-render-btn">Render</button>
+                    <button id="markdown-copy-html-btn">Copy HTML</button>
+                    <button id="markdown-clear-btn" class="btn-secondary">Clear</button>
+                </div>
+                <div id="markdown-output" class="markdown-preview"></div>
+            </div>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Happy Utils. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 
