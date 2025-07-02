@@ -1,45 +1,69 @@
 # Happy Utils
 
-A collection of simple, useful, and happy-to-use web-based utilities for developers. This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via GitHub Pages.
+A collection of simple, useful, and geek-styled web-based utilities for developers.  
+This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via GitHub Pages.
 
-**Live Demo: [https://today-self-study.github.io/happy-utils/](https://today-self-study.github.io/happy-utils/)**
+**Live Demo:**  
+[https://today-self-study.github.io/happy-utils/](https://today-self-study.github.io/happy-utils/)
 
 ---
 
 ## ✨ Features
 
-This collection currently includes the following tools:
+- **Modern, dark geek UI** inspired by [tss](https://today-self-study.github.io/tss/), with monospace fonts and minimal design.
+- **Responsive & Mobile-friendly:** All tools are centered, with proper padding and spacing for any device.
+- **Tab Navigation:** Instantly switch between tools using the top tab bar.
 
-1.  **Epoch & Unix Timestamp Converter**
-    -   Displays the current epoch time, updating every second.
-    -   Converts a given epoch timestamp to a human-readable date (both UTC and local time).
-    -   Converts a human-readable date string to an epoch timestamp.
+### Included Tools
 
-2.  **URL Encoder / Decoder**
-    -   Encodes a string or URL to be safe for use in URLs (`encodeURIComponent`).
-    -   Decodes a percent-encoded URL or string back to its original form (`decodeURIComponent`).
-    -   Includes quick buttons for copying the result and clearing the input.
+1. **Epoch & Unix Timestamp Converter**
+    - View the current epoch, UTC, and local time (with one-click copy).
+    - Convert epoch to human-readable date and vice versa.
+    - All results are easily copyable.
 
-3.  **JSON Formatter & Viewer**
-    -   Beautifies minified or unformatted JSON, making it easy to read.
-    -   Validates JSON and provides clear error messages for invalid input.
-    -   Allows copying the formatted JSON with a single click.
+2. **URL Encoder / Decoder**
+    - Encode/decode text for safe URL usage.
+    - Copy and clear with a single click.
+
+3. **JSON Formatter & Viewer**
+    - Beautify and validate JSON.
+    - Copy formatted JSON with one click.
+    - Error messages for invalid JSON.
+
+---
+
+## 🖥️ UI/UX
+
+- **Dark, minimal, and geeky**: Monospace font, yellow highlights, and a simple smiley favicon.
+- **Tab navigation**: Switch tools without page reload.
+- **Consistent copy UX**: All copy buttons show "Copied!" in the center, then revert.
+- **Responsive**: Looks great on both desktop and mobile, with balanced side paddings.
+
+---
 
 ## 🚀 How to Use
 
-1.  Visit the [Live Demo](https://today-self-study.github.io/happy-utils/).
-2.  Scroll to the tool you want to use.
-3.  Enter your input and use the buttons to get the result.
+1. Visit the [Live Demo](https://today-self-study.github.io/happy-utils/).
+2. Use the top tab bar to switch between tools.
+3. Enter your input and use the buttons to get and copy results.
+
+---
 
 ## 🛠️ Local Development
 
-To run this project locally, simply clone the repository and open the `index.html` file in your web browser.
+To run this project locally:
 
 ```bash
 git clone https://github.com/today-self-study/happy-utils.git
 cd happy-utils
 # Open index.html in your browser
 ```
+
+---
+
+## License
+
+MIT
 
 ---
 
