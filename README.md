@@ -30,6 +30,11 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
     - Copy formatted JSON with one click.
     - Error messages for invalid JSON.
 
+4. **Markdown Viewer**
+    - Write or paste Markdown and see a live HTML preview.
+    - Supports headings, lists, code, links, and more.
+    - Copy the rendered HTML or clear the input with one click.
+
 ---
 
 ## 🖥️ UI/UX
