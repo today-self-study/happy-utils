@@ -18,6 +18,7 @@
         <button class="tab-btn active" data-tab="epoch">Epoch Converter</button>
         <button class="tab-btn" data-tab="url">URL Encoder/Decoder</button>
         <button class="tab-btn" data-tab="json">JSON Formatter</button>
+        <button class="tab-btn" data-tab="markdown">Markdown Viewer</button>
     </nav>
 
     <main>
@@ -109,6 +110,21 @@
                     <button id="json-clear-btn" class="btn-secondary">Clear</button>
                 </div>
                 <pre id="json-output" class="result-box"></pre>
+            </div>
+        </section>
+
+        <section id="markdown-viewer" class="tool-section tab-content tab-markdown">
+            <h2>Markdown Viewer</h2>
+            <div class="tool-content">
+                <div class="form-group">
+                    <label for="markdown-input">Enter Markdown</label>
+                    <textarea id="markdown-input" placeholder="# Hello, Markdown!\n\n- List item\n- **Bold**\n- [Link](https://example.com)"></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="markdown-copy-btn">Copy HTML</button>
+                    <button id="markdown-clear-btn" class="btn-secondary">Clear</button>
+                </div>
+                <div id="markdown-preview" class="result-box markdown-preview"></div>
             </div>
         </section>
     </main>
