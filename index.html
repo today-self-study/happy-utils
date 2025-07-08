@@ -27,53 +27,27 @@
             <div class="tool-content">
                 
                 <div class="current-time-display">
-                    <h3>Current Time</h3>
+                    <h3>Time Converter</h3>
                     <div class="time-group">
                         <label>Epoch Timestamp</label>
                         <div class="output-group">
-                            <input type="text" id="current-epoch-display" readonly>
+                            <input type="text" id="current-epoch-display" placeholder="Enter epoch timestamp">
                             <button class="copy-btn" data-target="current-epoch-display">Copy</button>
                         </div>
                     </div>
                     <div class="time-group">
                         <label>UTC</label>
                         <div class="output-group">
-                            <input type="text" id="current-utc-display" readonly>
+                            <input type="text" id="current-utc-display" placeholder="Enter UTC date">
                             <button class="copy-btn" data-target="current-utc-display">Copy</button>
                         </div>
                     </div>
                     <div class="time-group">
                         <label>Your Local Time</label>
                         <div class="output-group">
-                            <input type="text" id="current-local-display" readonly>
+                            <input type="text" id="current-local-display" placeholder="Enter local date">
                             <button class="copy-btn" data-target="current-local-display">Copy</button>
                         </div>
-                    </div>
-                </div>
-
-                <hr class="section-divider">
-
-                <h3>Convert Timestamp</h3>
-                <div class="converter-group">
-                    <div class="form-group">
-                        <label for="epoch-input">Epoch Timestamp &rarr; Date</label>
-                        <input type="number" id="epoch-input" placeholder="Enter Epoch time">
-                        <button id="to-date-btn">Convert</button>
-                    </div>
-                    <div class="output-group">
-                        <input type="text" id="epoch-to-date-output" placeholder="Date output (UTC)" readonly>
-                        <button class="copy-btn" data-target="epoch-to-date-output">Copy</button>
-                    </div>
-                </div>
-                <div class="converter-group">
-                     <div class="form-group">
-                        <label for="date-input">Date &rarr; Epoch Timestamp</label>
-                        <input type="text" id="date-input" placeholder="e.g., 2023-10-27T10:00:00Z">
-                        <button id="to-epoch-btn">Convert</button>
-                    </div>
-                    <div class="output-group">
-                        <input type="text" id="date-to-epoch-output" placeholder="Epoch output" readonly>
-                        <button class="copy-btn" data-target="date-to-epoch-output">Copy</button>
                     </div>
                 </div>
                 <div id="epoch-result" class="result-box" style="display: none;"></div>

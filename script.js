@@ -11,20 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     };
 
-    // --- Epoch Converter ---
+    // --- Time Converter ---
     const currentEpochDisplay = document.getElementById('current-epoch-display');
     const currentUtcDisplay = document.getElementById('current-utc-display');
     const currentLocalDisplay = document.getElementById('current-local-display');
-    
-    const epochInput = document.getElementById('epoch-input');
-    const toDateBtn = document.getElementById('to-date-btn');
-    const epochToDateOutput = document.getElementById('epoch-to-date-output');
-    
-    const dateInput = document.getElementById('date-input');
-    const toEpochBtn = document.getElementById('to-epoch-btn');
-    const dateToEpochOutput = document.getElementById('date-to-epoch-output');
-
     const epochResultBox = document.getElementById('epoch-result');
+
+    let userInputActive = false;
+    let currentTimeInterval;
 
     const formatReadableDate = (date) => {
         // YYYY-MM-DD HH:mm:ss format
@@ -40,7 +34,38 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())} ${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())} UTC (${dayName})`;
     };
 
+    const updateFromEpoch = (epochSeconds) => {
+        if (isNaN(epochSeconds) || epochSeconds === '') return;
+        const date = new Date(epochSeconds * 1000);
+        if (isNaN(date.getTime())) return;
+        
+        currentUtcDisplay.value = formatReadableUTCDate(date);
+        currentLocalDisplay.value = formatReadableDate(date);
+    };
+
+    const updateFromUTC = (utcString) => {
+        if (!utcString) return;
+        const date = new Date(utcString);
+        if (isNaN(date.getTime())) return;
+        
+        const epochSeconds = Math.floor(date.getTime() / 1000);
+        currentEpochDisplay.value = epochSeconds;
+        currentLocalDisplay.value = formatReadableDate(date);
+    };
+
+    const updateFromLocal = (localString) => {
+        if (!localString) return;
+        const date = new Date(localString);
+        if (isNaN(date.getTime())) return;
+        
+        const epochSeconds = Math.floor(date.getTime() / 1000);
+        currentEpochDisplay.value = epochSeconds;
+        currentUtcDisplay.value = formatReadableUTCDate(date);
+    };
+
     const updateCurrentTime = () => {
+        if (userInputActive) return;
+        
         const now = new Date();
         const epochSeconds = Math.floor(now.getTime() / 1000);
         
@@ -49,39 +74,44 @@ document.addEventListener('DOMContentLoaded', () => {
         currentLocalDisplay.value = formatReadableDate(now);
     };
 
-    const convertEpochToDate = () => {
-        const epoch = epochInput.value;
-        if (!epoch || isNaN(epoch)) {
-            showMessage(epochResultBox, 'Error: Please enter a valid Epoch timestamp.', true);
-            epochToDateOutput.value = '';
-            return;
-        }
-        const date = new Date(epoch * 1000);
-        epochToDateOutput.value = formatReadableUTCDate(date);
+    const checkAllFieldsEmpty = () => {
+        return !currentEpochDisplay.value && !currentUtcDisplay.value && !currentLocalDisplay.value;
     };
 
-    const convertDateToEpoch = () => {
-        const dateStr = dateInput.value;
-        if (!dateStr) {
-            showMessage(epochResultBox, 'Error: Please enter a date string.', true);
-            dateToEpochOutput.value = '';
+    // --- Event Listeners for Time Converter ---
+    currentEpochDisplay.addEventListener('input', (e) => {
+        userInputActive = true;
+        if (checkAllFieldsEmpty()) {
+            userInputActive = false;
+            updateCurrentTime();
             return;
         }
-        const date = new Date(dateStr);
-        if (isNaN(date.getTime())) {
-            showMessage(epochResultBox, 'Error: Invalid date format.', true);
-            dateToEpochOutput.value = '';
+        updateFromEpoch(e.target.value);
+    });
+
+    currentUtcDisplay.addEventListener('input', (e) => {
+        userInputActive = true;
+        if (checkAllFieldsEmpty()) {
+            userInputActive = false;
+            updateCurrentTime();
             return;
         }
-        dateToEpochOutput.value = Math.floor(date.getTime() / 1000);
-    };
-    
-    // --- Event Listeners for Epoch Converter ---
+        updateFromUTC(e.target.value);
+    });
+
+    currentLocalDisplay.addEventListener('input', (e) => {
+        userInputActive = true;
+        if (checkAllFieldsEmpty()) {
+            userInputActive = false;
+            updateCurrentTime();
+            return;
+        }
+        updateFromLocal(e.target.value);
+    });
+
+    // Initialize with current time
     updateCurrentTime();
-    setInterval(updateCurrentTime, 1000);
-
-    toDateBtn.addEventListener('click', convertEpochToDate);
-    toEpochBtn.addEventListener('click', convertDateToEpoch);
+    currentTimeInterval = setInterval(updateCurrentTime, 1000);
 
     // --- General Event Listeners ---
     document.querySelectorAll('.copy-btn').forEach(button => {
