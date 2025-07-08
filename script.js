@@ -27,11 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const formatReadableUTCDate = (date) => {
-        // YYYY-MM-DD HH:mm:ss format for UTC with day of week
+        // YYYY-MM-DD HH:mm:ss format for UTC
         const pad = (n) => n < 10 ? '0' + n : n;
-        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        const dayName = days[date.getUTCDay()];
-        return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())} ${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())} UTC (${dayName})`;
+        return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())} ${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())}`;
     };
 
     const updateFromEpoch = (epochSeconds) => {
