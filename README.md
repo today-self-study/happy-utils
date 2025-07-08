@@ -17,9 +17,10 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
 ### Included Tools
 
 1. **Epoch & Unix Timestamp Converter**
-    - View the current epoch, UTC, and local time (with one-click copy).
-    - Convert epoch to human-readable date and vice versa.
-    - All results are easily copyable.
+    - Interactive time converter with real-time conversion between epoch, UTC, and local time.
+    - Enter a value in any field and the other fields automatically update.
+    - Defaults to current time when all fields are empty.
+    - All results are easily copyable with one-click copy buttons.
 
 2. **URL Encoder / Decoder**
     - Encode/decode text for safe URL usage.
