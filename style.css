@@ -151,15 +151,19 @@ button:hover, button.copied {
 .copy-btn {
     min-width: 80px;
     max-width: 100px;
-    margin-left: 0.5rem;
-    font-size: 1rem;
-    padding: 0.7rem 0.5rem;
+    margin-left: 0;
+    font-size: 0.95rem;
+    padding: 0.7rem 0.8rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left: none;
     transition: background 0.18s, color 0.18s, border 0.18s;
     overflow: hidden;
     white-space: nowrap;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .copy-btn.copied {
@@ -170,8 +174,8 @@ button:hover, button.copied {
 
 .output-group {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: stretch;
+    gap: 0;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
 }
@@ -250,13 +254,12 @@ footer {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     flex-grow: 1;
+    margin-bottom: 0;
+    min-height: 0;
+    height: auto;
 }
 
-.copy-btn {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    width: 80px; /* Fixed width for copy buttons */
-}
+/* Copy button styles are now unified above */
 
 #to-date-btn, #to-epoch-btn {
     width: 100%;
