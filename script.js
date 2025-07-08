@@ -32,12 +32,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
     };
 
+    const formatReadableUTCDate = (date) => {
+        // YYYY-MM-DD HH:mm:ss format for UTC with day of week
+        const pad = (n) => n < 10 ? '0' + n : n;
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const dayName = days[date.getUTCDay()];
+        return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())} ${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())} UTC (${dayName})`;
+    };
+
     const updateCurrentTime = () => {
         const now = new Date();
         const epochSeconds = Math.floor(now.getTime() / 1000);
         
         currentEpochDisplay.value = epochSeconds;
-        currentUtcDisplay.value = now.toUTCString();
+        currentUtcDisplay.value = formatReadableUTCDate(now);
         currentLocalDisplay.value = formatReadableDate(now);
     };
 
@@ -49,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         const date = new Date(epoch * 1000);
-        epochToDateOutput.value = date.toUTCString();
+        epochToDateOutput.value = formatReadableUTCDate(date);
     };
 
     const convertDateToEpoch = () => {
