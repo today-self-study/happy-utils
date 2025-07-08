@@ -36,6 +36,12 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
     - Supports headings, lists, code, links, and more.
     - Copy the rendered HTML or clear the input with one click.
 
+5. **SVG Viewer**
+    - Paste SVG code and see a live visual preview.
+    - Real-time rendering with error validation.
+    - Copy SVG code or clear the input with one click.
+    - Perfect for testing and previewing SVG graphics.
+
 ---
 
 ## 🖥️ UI/UX

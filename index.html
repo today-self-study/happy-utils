@@ -19,6 +19,7 @@
         <button class="tab-btn" data-tab="url">URL Encoder/Decoder</button>
         <button class="tab-btn" data-tab="json">JSON Formatter</button>
         <button class="tab-btn" data-tab="markdown">Markdown Viewer</button>
+        <button class="tab-btn" data-tab="svg">SVG Viewer</button>
     </nav>
 
     <main>
@@ -99,6 +100,21 @@
                     <button id="markdown-clear-btn" class="btn-secondary">Clear</button>
                 </div>
                 <div id="markdown-preview" class="result-box markdown-preview"></div>
+            </div>
+        </section>
+
+        <section id="svg-viewer" class="tool-section tab-content tab-svg">
+            <h2>SVG Viewer</h2>
+            <div class="tool-content">
+                <div class="form-group">
+                    <label for="svg-input">Enter SVG Code</label>
+                    <textarea id="svg-input" placeholder="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;>&#10;  <circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot; fill=&quot;#ffde59&quot; stroke=&quot;#333&quot; stroke-width=&quot;2&quot;/>&#10;</svg>"></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="svg-copy-btn">Copy SVG</button>
+                    <button id="svg-clear-btn" class="btn-secondary">Clear</button>
+                </div>
+                <div id="svg-preview" class="result-box svg-preview"></div>
             </div>
         </section>
     </main>

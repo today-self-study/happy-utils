@@ -250,4 +250,67 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize preview
         updateMarkdownPreview();
     }
+
+    // --- SVG Viewer ---
+    const svgInput = document.getElementById('svg-input');
+    const svgPreview = document.getElementById('svg-preview');
+    const svgCopyBtn = document.getElementById('svg-copy-btn');
+    const svgClearBtn = document.getElementById('svg-clear-btn');
+
+    function updateSvgPreview() {
+        const svgCode = svgInput.value.trim();
+        if (!svgCode) {
+            svgPreview.innerHTML = '<p style="color: #888;">Enter SVG code to see preview</p>';
+            return;
+        }
+
+        // Basic SVG validation
+        if (!svgCode.includes('<svg') || !svgCode.includes('</svg>')) {
+            svgPreview.innerHTML = '<p style="color: #ff6b6b;">Invalid SVG: Must contain &lt;svg&gt; tags</p>';
+            return;
+        }
+
+        try {
+            // Create a temporary container to validate SVG
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = svgCode;
+            const svgElement = tempDiv.querySelector('svg');
+            
+            if (!svgElement) {
+                svgPreview.innerHTML = '<p style="color: #ff6b6b;">Invalid SVG: No valid SVG element found</p>';
+                return;
+            }
+
+            // Render the SVG
+            svgPreview.innerHTML = svgCode;
+        } catch (error) {
+            svgPreview.innerHTML = '<p style="color: #ff6b6b;">Error rendering SVG: ' + error.message + '</p>';
+        }
+    }
+
+    if (svgInput) {
+        svgInput.addEventListener('input', updateSvgPreview);
+        
+        svgCopyBtn.addEventListener('click', () => {
+            if (!svgInput.value) return;
+            navigator.clipboard.writeText(svgInput.value)
+                .then(() => {
+                    const originalText = svgCopyBtn.textContent;
+                    svgCopyBtn.textContent = 'Copied!';
+                    svgCopyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        svgCopyBtn.textContent = originalText;
+                        svgCopyBtn.classList.remove('copied');
+                    }, 1200);
+                });
+        });
+
+        svgClearBtn.addEventListener('click', () => {
+            svgInput.value = '';
+            updateSvgPreview();
+        });
+
+        // Initialize preview
+        updateSvgPreview();
+    }
 }); 
