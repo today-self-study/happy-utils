@@ -81,7 +81,8 @@ main {
     margin-bottom: 1rem;
 }
 
-.form-group label {
+.form-group label,
+.time-group label {
     color: #ffde59;
     font-weight: 600;
     margin-bottom: 0.3rem;
