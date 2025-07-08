@@ -74,16 +74,20 @@ document.addEventListener('DOMContentLoaded', () => {
         currentLocalDisplay.value = formatReadableDate(now);
     };
 
-    const checkAllFieldsEmpty = () => {
-        return !currentEpochDisplay.value && !currentUtcDisplay.value && !currentLocalDisplay.value;
+    const checkAnyFieldEmpty = () => {
+        return !currentEpochDisplay.value || !currentUtcDisplay.value || !currentLocalDisplay.value;
+    };
+
+    const resetToCurrentTime = () => {
+        userInputActive = false;
+        updateCurrentTime();
     };
 
     // --- Event Listeners for Time Converter ---
     currentEpochDisplay.addEventListener('input', (e) => {
         userInputActive = true;
-        if (checkAllFieldsEmpty()) {
-            userInputActive = false;
-            updateCurrentTime();
+        if (checkAnyFieldEmpty()) {
+            resetToCurrentTime();
             return;
         }
         updateFromEpoch(e.target.value);
@@ -91,9 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     currentUtcDisplay.addEventListener('input', (e) => {
         userInputActive = true;
-        if (checkAllFieldsEmpty()) {
-            userInputActive = false;
-            updateCurrentTime();
+        if (checkAnyFieldEmpty()) {
+            resetToCurrentTime();
             return;
         }
         updateFromUTC(e.target.value);
@@ -101,17 +104,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     currentLocalDisplay.addEventListener('input', (e) => {
         userInputActive = true;
-        if (checkAllFieldsEmpty()) {
-            userInputActive = false;
-            updateCurrentTime();
+        if (checkAnyFieldEmpty()) {
+            resetToCurrentTime();
             return;
         }
         updateFromLocal(e.target.value);
     });
 
-    // Initialize with current time
+    // Initialize with current time (no auto-refresh)
     updateCurrentTime();
-    currentTimeInterval = setInterval(updateCurrentTime, 1000);
 
     // --- General Event Listeners ---
     document.querySelectorAll('.copy-btn').forEach(button => {
