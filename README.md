@@ -26,7 +26,12 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
     - Encode/decode text for safe URL usage.
     - Copy and clear with a single click.
 
-3. **JSON Formatter & Viewer**
+3. **Base64 Encoder / Decoder**
+    - Encode text to Base64 format and decode Base64 strings back to text.
+    - Perfect for data encoding, API testing, and web development.
+    - Copy and clear with a single click.
+
+4. **JSON Formatter & Viewer**
     - Beautify and validate JSON.
     - Copy formatted JSON with one click.
     - Error messages for invalid JSON.
