@@ -156,6 +156,50 @@ document.addEventListener('DOMContentLoaded', () => {
         urlInput.value = '';
     });
 
+    // --- Base64 Encoder/Decoder ---
+    const base64Input = document.getElementById('base64-input');
+    const base64EncodeBtn = document.getElementById('base64-encode-btn');
+    const base64DecodeBtn = document.getElementById('base64-decode-btn');
+    const base64CopyBtn = document.getElementById('base64-copy-btn');
+    const base64ClearBtn = document.getElementById('base64-clear-btn');
+    const base64ResultBox = document.getElementById('base64-result');
+
+    base64EncodeBtn.addEventListener('click', () => {
+        try {
+            base64Input.value = btoa(base64Input.value);
+        } catch (e) {
+            showMessage(base64ResultBox, 'Error: The input string contains invalid characters for encoding.', true);
+        }
+    });
+
+    base64DecodeBtn.addEventListener('click', () => {
+        try {
+            base64Input.value = atob(base64Input.value);
+        } catch (e) {
+            showMessage(base64ResultBox, 'Error: The input string is not a valid Base64 string.', true);
+        }
+    });
+
+    base64CopyBtn.addEventListener('click', () => {
+        if (base64Input.value) {
+            navigator.clipboard.writeText(base64Input.value)
+                .then(() => {
+                    const originalText = base64CopyBtn.textContent;
+                    base64CopyBtn.textContent = 'Copied!';
+                    base64CopyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        base64CopyBtn.textContent = originalText;
+                        base64CopyBtn.classList.remove('copied');
+                    }, 1200);
+                })
+                .catch(err => console.error('Failed to copy: ', err));
+        }
+    });
+
+    base64ClearBtn.addEventListener('click', () => {
+        base64Input.value = '';
+    });
+
     // --- JSON Formatter ---
     const jsonInput = document.getElementById('json-input');
     const jsonFormatBtn = document.getElementById('json-format-btn');
