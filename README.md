@@ -31,17 +31,23 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
     - Perfect for data encoding, API testing, and web development.
     - Copy and clear with a single click.
 
-4. **JSON Formatter & Viewer**
+4. **Text Diff Checker**
+    - Compare two texts line-by-line and highlight differences.
+    - Visual diff display with color-coded additions, deletions, and changes.
+    - Perfect for code reviews, document comparison, and version control.
+    - Copy diff results or clear inputs with a single click.
+
+5. **JSON Formatter & Viewer**
     - Beautify and validate JSON.
     - Copy formatted JSON with one click.
     - Error messages for invalid JSON.
 
-4. **Markdown Viewer**
+6. **Markdown Viewer**
     - Write or paste Markdown and see a live HTML preview.
     - Supports headings, lists, code, links, and more.
     - Copy the rendered HTML or clear the input with one click.
 
-5. **SVG Viewer**
+7. **SVG Viewer**
     - Paste SVG code and see a live visual preview.
     - Real-time rendering with error validation.
     - Copy SVG code or clear the input with one click.
