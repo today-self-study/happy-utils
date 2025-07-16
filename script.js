@@ -200,6 +200,105 @@ document.addEventListener('DOMContentLoaded', () => {
         base64Input.value = '';
     });
 
+    // --- Text Diff Checker ---
+    const diffOriginal = document.getElementById('diff-original');
+    const diffNew = document.getElementById('diff-new');
+    const diffCompareBtn = document.getElementById('diff-compare-btn');
+    const diffCopyBtn = document.getElementById('diff-copy-btn');
+    const diffClearBtn = document.getElementById('diff-clear-btn');
+    const diffResultBox = document.getElementById('diff-result');
+
+    let diffResultText = '';
+
+    // Simple line-by-line diff algorithm
+    function generateDiff(original, newText) {
+        const originalLines = original.split('\n');
+        const newLines = newText.split('\n');
+        const maxLines = Math.max(originalLines.length, newLines.length);
+        let diffHtml = '';
+        let diffPlainText = '';
+
+        for (let i = 0; i < maxLines; i++) {
+            const originalLine = originalLines[i] || '';
+            const newLine = newLines[i] || '';
+
+            if (originalLine === newLine) {
+                // No change
+                if (originalLine !== '') {
+                    diffHtml += `<div class="diff-line unchanged">${escapeHtml(originalLine)}</div>`;
+                    diffPlainText += `  ${originalLine}\n`;
+                }
+            } else if (originalLine && newLine) {
+                // Modified line
+                diffHtml += `<div class="diff-line removed">- ${escapeHtml(originalLine)}</div>`;
+                diffHtml += `<div class="diff-line added">+ ${escapeHtml(newLine)}</div>`;
+                diffPlainText += `- ${originalLine}\n+ ${newLine}\n`;
+            } else if (originalLine) {
+                // Deleted line
+                diffHtml += `<div class="diff-line removed">- ${escapeHtml(originalLine)}</div>`;
+                diffPlainText += `- ${originalLine}\n`;
+            } else if (newLine) {
+                // Added line
+                diffHtml += `<div class="diff-line added">+ ${escapeHtml(newLine)}</div>`;
+                diffPlainText += `+ ${newLine}\n`;
+            }
+        }
+
+        return { html: diffHtml, text: diffPlainText };
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    diffCompareBtn.addEventListener('click', () => {
+        const originalText = diffOriginal.value;
+        const newText = diffNew.value;
+
+        if (!originalText && !newText) {
+            showMessage(diffResultBox, 'Please enter text in both fields to compare.', true);
+            return;
+        }
+
+        const diff = generateDiff(originalText, newText);
+        
+        if (diff.html === '') {
+            diffResultBox.innerHTML = '<div class="diff-no-changes">No differences found.</div>';
+            diffResultText = 'No differences found.';
+        } else {
+            diffResultBox.innerHTML = diff.html;
+            diffResultText = diff.text;
+        }
+        
+        diffResultBox.style.display = 'block';
+        diffResultBox.style.color = '#e0e0e0';
+    });
+
+    diffCopyBtn.addEventListener('click', () => {
+        if (diffResultText) {
+            navigator.clipboard.writeText(diffResultText)
+                .then(() => {
+                    const originalText = diffCopyBtn.textContent;
+                    diffCopyBtn.textContent = 'Copied!';
+                    diffCopyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        diffCopyBtn.textContent = originalText;
+                        diffCopyBtn.classList.remove('copied');
+                    }, 1200);
+                })
+                .catch(err => console.error('Failed to copy: ', err));
+        }
+    });
+
+    diffClearBtn.addEventListener('click', () => {
+        diffOriginal.value = '';
+        diffNew.value = '';
+        diffResultBox.style.display = 'none';
+        diffResultText = '';
+    });
+
     // --- JSON Formatter ---
     const jsonInput = document.getElementById('json-input');
     const jsonFormatBtn = document.getElementById('json-format-btn');

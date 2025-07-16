@@ -18,6 +18,7 @@
         <button class="tab-btn active" data-tab="epoch">Epoch Converter</button>
         <button class="tab-btn" data-tab="url">URL Encoder/Decoder</button>
         <button class="tab-btn" data-tab="base64">Base64 Encoder/Decoder</button>
+        <button class="tab-btn" data-tab="diff">Text Diff Checker</button>
         <button class="tab-btn" data-tab="json">JSON Formatter</button>
         <button class="tab-btn" data-tab="markdown">Markdown Viewer</button>
         <button class="tab-btn" data-tab="svg">SVG Viewer</button>
@@ -86,6 +87,26 @@
                     <button id="base64-clear-btn" class="btn-secondary">Clear</button>
                 </div>
                 <div id="base64-result" class="result-box" style="display: none;"></div>
+            </div>
+        </section>
+
+        <section id="diff-checker" class="tool-section tab-content tab-diff">
+            <h2>Text Diff Checker</h2>
+            <div class="tool-content">
+                <div class="form-group">
+                    <label for="diff-original">Original Text</label>
+                    <textarea id="diff-original" placeholder="Paste your original text here..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="diff-new">New Text</label>
+                    <textarea id="diff-new" placeholder="Paste your new text here..."></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="diff-compare-btn">Compare</button>
+                    <button id="diff-copy-btn">Copy Result</button>
+                    <button id="diff-clear-btn" class="btn-secondary">Clear</button>
+                </div>
+                <div id="diff-result" class="result-box" style="display: none;"></div>
             </div>
         </section>
 
