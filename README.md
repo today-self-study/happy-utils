@@ -31,23 +31,29 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
     - Perfect for data encoding, API testing, and web development.
     - Copy and clear with a single click.
 
-4. **Text Diff Checker**
+4. **Hash Generator**
+    - Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from any text input.
+    - Perfect for password hashing, file integrity checks, and API authentication.
+    - All hash types generated simultaneously with individual copy buttons.
+    - Uses Web Crypto API for SHA algorithms and pure JavaScript for MD5.
+
+5. **Text Diff Checker**
     - Compare two texts line-by-line and highlight differences.
     - Visual diff display with color-coded additions, deletions, and changes.
     - Perfect for code reviews, document comparison, and version control.
     - Copy diff results or clear inputs with a single click.
 
-5. **JSON Formatter & Viewer**
+6. **JSON Formatter & Viewer**
     - Beautify and validate JSON.
     - Copy formatted JSON with one click.
     - Error messages for invalid JSON.
 
-6. **Markdown Viewer**
+7. **Markdown Viewer**
     - Write or paste Markdown and see a live HTML preview.
     - Supports headings, lists, code, links, and more.
     - Copy the rendered HTML or clear the input with one click.
 
-7. **SVG Viewer**
+8. **SVG Viewer**
     - Paste SVG code and see a live visual preview.
     - Real-time rendering with error validation.
     - Copy SVG code or clear the input with one click.
