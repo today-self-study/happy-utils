@@ -438,4 +438,113 @@ footer {
     background-color: rgba(255, 222, 89, 0.1);
     border-radius: 6px;
     border: 1px solid rgba(255, 222, 89, 0.3);
+}
+
+/* HTTP Client Styles */
+.method-url-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+}
+
+.method-url-group select {
+    background: #232323;
+    color: #ffde59;
+    border: 1.5px solid #333;
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 100px;
+    flex-shrink: 0;
+}
+
+.method-url-group select:focus {
+    outline: none;
+    border-color: #ffde59;
+    background: #232323;
+}
+
+.method-url-group input {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.header-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+    margin-bottom: 0.5rem;
+}
+
+.header-row input {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.remove-header-btn {
+    background: #ff6b6b;
+    color: #fff;
+    border: 1.5px solid #ff6b6b;
+    border-radius: 6px;
+    padding: 0.7rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 40px;
+    flex-shrink: 0;
+    transition: background 0.18s, border 0.18s;
+}
+
+.remove-header-btn:hover {
+    background: #ff5252;
+    border-color: #ff5252;
+}
+
+.http-response-section h3 {
+    color: #ffde59;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 1rem 0 1rem 0;
+    letter-spacing: 0.06em;
+}
+
+.response-status {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.response-status .time-group {
+    flex: 1;
+}
+
+select {
+    background: #232323;
+    color: #e0e0e0;
+    border: 1.5px solid #333;
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    margin-bottom: 0.5rem;
+    transition: border 0.2s, background 0.2s;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+select:focus {
+    outline: none;
+    border-color: #ffde59;
+    background: #232323;
+}
+
+.copy-btn[data-target="http-response-headers"],
+.copy-btn[data-target="http-response-body"] {
+    margin-top: 0.5rem;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-left: 1.5px solid #333;
 } 

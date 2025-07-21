@@ -625,4 +625,272 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize preview
         updateSvgPreview();
     }
+
+    // --- HTTP Client ---
+    const httpMethod = document.getElementById('http-method');
+    const httpUrl = document.getElementById('http-url');
+    const httpHeadersContainer = document.getElementById('http-headers-container');
+    const addHeaderBtn = document.getElementById('add-header-btn');
+    const httpBodyType = document.getElementById('http-body-type');
+    const httpBodyGroup = document.getElementById('http-body-group');
+    const httpBody = document.getElementById('http-body');
+    const httpSendBtn = document.getElementById('http-send-btn');
+    const httpClearBtn = document.getElementById('http-clear-btn');
+    const httpResponseSection = document.getElementById('http-response-section');
+    const httpStatus = document.getElementById('http-status');
+    const httpTime = document.getElementById('http-time');
+    const httpResponseHeaders = document.getElementById('http-response-headers');
+    const httpResponseBody = document.getElementById('http-response-body');
+    const httpFormatResponseBtn = document.getElementById('http-format-response-btn');
+    const httpError = document.getElementById('http-error');
+
+    // Add header functionality
+    function createHeaderRow() {
+        const headerRow = document.createElement('div');
+        headerRow.className = 'header-row';
+        headerRow.innerHTML = `
+            <input type="text" class="header-key" placeholder="Header name">
+            <input type="text" class="header-value" placeholder="Header value">
+            <button type="button" class="remove-header-btn">×</button>
+        `;
+        
+        headerRow.querySelector('.remove-header-btn').addEventListener('click', () => {
+            headerRow.remove();
+        });
+        
+        return headerRow;
+    }
+
+    // Initialize with one header row
+    httpHeadersContainer.querySelector('.remove-header-btn').addEventListener('click', function() {
+        this.parentElement.remove();
+    });
+
+    addHeaderBtn.addEventListener('click', () => {
+        httpHeadersContainer.appendChild(createHeaderRow());
+    });
+
+    // Body type change handler
+    httpBodyType.addEventListener('change', () => {
+        if (httpBodyType.value === 'none') {
+            httpBodyGroup.style.display = 'none';
+        } else {
+            httpBodyGroup.style.display = 'block';
+            const placeholders = {
+                'json': '{\n  "key": "value",\n  "number": 123\n}',
+                'text': 'Enter your text data here...',
+                'form': 'key1=value1&key2=value2'
+            };
+            httpBody.placeholder = placeholders[httpBodyType.value] || '';
+        }
+    });
+
+    // Collect headers from UI
+    function getHeaders() {
+        const headers = {};
+        const headerRows = httpHeadersContainer.querySelectorAll('.header-row');
+        
+        headerRows.forEach(row => {
+            const key = row.querySelector('.header-key').value.trim();
+            const value = row.querySelector('.header-value').value.trim();
+            if (key && value) {
+                headers[key] = value;
+            }
+        });
+        
+        return headers;
+    }
+
+    // Format response headers for display
+    function formatResponseHeaders(response) {
+        let headersText = '';
+        for (const [key, value] of response.headers.entries()) {
+            headersText += `${key}: ${value}\n`;
+        }
+        return headersText || 'No headers';
+    }
+
+    // Send HTTP request
+    httpSendBtn.addEventListener('click', async () => {
+        const url = httpUrl.value.trim();
+        
+        if (!url) {
+            showMessage(httpError, 'Please enter a URL.', true);
+            return;
+        }
+
+        // Validate URL
+        try {
+            new URL(url);
+        } catch (e) {
+            showMessage(httpError, 'Please enter a valid URL.', true);
+            return;
+        }
+
+        const method = httpMethod.value;
+        const headers = getHeaders();
+        const bodyType = httpBodyType.value;
+        
+        // Prepare request options
+        const requestOptions = {
+            method: method,
+            headers: headers,
+            mode: 'cors'
+        };
+
+        // Add body if needed
+        if (bodyType !== 'none' && ['POST', 'PUT', 'PATCH'].includes(method)) {
+            const bodyContent = httpBody.value.trim();
+            if (bodyContent) {
+                if (bodyType === 'json') {
+                    try {
+                        // Validate JSON
+                        JSON.parse(bodyContent);
+                        requestOptions.body = bodyContent;
+                        if (!headers['Content-Type']) {
+                            requestOptions.headers['Content-Type'] = 'application/json';
+                        }
+                    } catch (e) {
+                        showMessage(httpError, 'Invalid JSON in request body: ' + e.message, true);
+                        return;
+                    }
+                } else if (bodyType === 'form') {
+                    requestOptions.body = bodyContent;
+                    if (!headers['Content-Type']) {
+                        requestOptions.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                    }
+                } else {
+                    requestOptions.body = bodyContent;
+                }
+            }
+        }
+
+        // Show loading state
+        httpSendBtn.textContent = 'Sending...';
+        httpSendBtn.disabled = true;
+        httpError.style.display = 'none';
+        httpResponseSection.style.display = 'none';
+
+        const startTime = performance.now();
+
+        try {
+            const response = await fetch(url, requestOptions);
+            const endTime = performance.now();
+            const duration = Math.round(endTime - startTime);
+
+            // Update status
+            httpStatus.value = `${response.status} ${response.statusText}`;
+            httpTime.value = `${duration}ms`;
+
+            // Update headers
+            httpResponseHeaders.textContent = formatResponseHeaders(response);
+
+            // Update body
+            const contentType = response.headers.get('content-type') || '';
+            let responseText = '';
+            
+            try {
+                responseText = await response.text();
+                
+                // Try to format JSON automatically
+                if (contentType.includes('application/json') || 
+                   (responseText.trim().startsWith('{') && responseText.trim().endsWith('}'))) {
+                    try {
+                        const jsonData = JSON.parse(responseText);
+                        httpResponseBody.textContent = JSON.stringify(jsonData, null, 2);
+                    } catch {
+                        httpResponseBody.textContent = responseText;
+                    }
+                } else {
+                    httpResponseBody.textContent = responseText;
+                }
+            } catch (e) {
+                httpResponseBody.textContent = 'Error reading response body: ' + e.message;
+            }
+
+            // Set response status color
+            if (response.status >= 200 && response.status < 300) {
+                httpStatus.style.color = '#4caf50';
+            } else if (response.status >= 400) {
+                httpStatus.style.color = '#ff6b6b';
+            } else {
+                httpStatus.style.color = '#ffde59';
+            }
+
+            httpResponseSection.style.display = 'block';
+
+        } catch (error) {
+            console.error('Request failed:', error);
+            let errorMessage = 'Request failed: ';
+            
+            if (error.name === 'TypeError') {
+                errorMessage += 'Network error or CORS issue. Make sure the server supports CORS.';
+            } else {
+                errorMessage += error.message;
+            }
+            
+            showMessage(httpError, errorMessage, true);
+        } finally {
+            httpSendBtn.textContent = 'Send Request';
+            httpSendBtn.disabled = false;
+        }
+    });
+
+    // Format JSON response
+    httpFormatResponseBtn.addEventListener('click', () => {
+        try {
+            const jsonData = JSON.parse(httpResponseBody.textContent);
+            httpResponseBody.textContent = JSON.stringify(jsonData, null, 2);
+            showMessage(httpError, 'JSON formatted successfully!', false);
+        } catch (e) {
+            showMessage(httpError, 'Response is not valid JSON: ' + e.message, true);
+        }
+    });
+
+    // Clear HTTP client
+    httpClearBtn.addEventListener('click', () => {
+        httpMethod.value = 'GET';
+        httpUrl.value = '';
+        httpBodyType.value = 'none';
+        httpBody.value = '';
+        httpBodyGroup.style.display = 'none';
+        httpResponseSection.style.display = 'none';
+        httpError.style.display = 'none';
+        httpStatus.style.color = '';
+        
+        // Clear all header rows except the first one
+        const headerRows = httpHeadersContainer.querySelectorAll('.header-row');
+        headerRows.forEach((row, index) => {
+            if (index > 0) {
+                row.remove();
+            } else {
+                row.querySelector('.header-key').value = '';
+                row.querySelector('.header-value').value = '';
+            }
+        });
+    });
+
+    // Enhanced copy functionality for response elements
+    const originalCopyButtonHandler = document.querySelector('.copy-btn').onclick;
+    
+    document.querySelectorAll('.copy-btn[data-target="http-response-headers"], .copy-btn[data-target="http-response-body"]').forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.dataset.target;
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement && targetElement.textContent) {
+                navigator.clipboard.writeText(targetElement.textContent)
+                    .then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.classList.remove('copied');
+                        }, 1200);
+                    })
+                    .catch(err => console.error('Failed to copy: ', err));
+            }
+        });
+    });
 }); 

@@ -59,6 +59,15 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
     - Copy SVG code or clear the input with one click.
     - Perfect for testing and previewing SVG graphics.
 
+9. **HTTP Client**
+    - Send HTTP requests like Postman with full method support (GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS).
+    - Add custom headers with dynamic key-value pairs.
+    - Support for JSON, Text, and Form data request bodies.
+    - Complete response display including status code, headers, and formatted body.
+    - Automatic JSON formatting and response time measurement.
+    - CORS-aware with helpful error messages.
+    - Copy response data with one-click buttons.
+
 ---
 
 ## 🖥️ UI/UX

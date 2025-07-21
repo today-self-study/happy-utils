@@ -23,6 +23,7 @@
         <button class="tab-btn" data-tab="json">JSON Formatter</button>
         <button class="tab-btn" data-tab="markdown">Markdown Viewer</button>
         <button class="tab-btn" data-tab="svg">SVG Viewer</button>
+        <button class="tab-btn" data-tab="http">HTTP Client</button>
     </nav>
 
     <main>
@@ -200,6 +201,100 @@
                     <button id="svg-clear-btn" class="btn-secondary">Clear</button>
                 </div>
                 <div id="svg-preview" class="result-box svg-preview"></div>
+            </div>
+        </section>
+
+        <section id="http-client" class="tool-section tab-content tab-http">
+            <h2>HTTP Client</h2>
+            <div class="tool-content">
+                <div class="http-request-section">
+                    <div class="form-group">
+                        <label for="http-method">Method & URL</label>
+                        <div class="method-url-group">
+                            <select id="http-method">
+                                <option value="GET">GET</option>
+                                <option value="POST">POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                                <option value="PATCH">PATCH</option>
+                                <option value="HEAD">HEAD</option>
+                                <option value="OPTIONS">OPTIONS</option>
+                            </select>
+                            <input type="text" id="http-url" placeholder="https://api.example.com/endpoint">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Headers</label>
+                        <div id="http-headers-container">
+                            <div class="header-row">
+                                <input type="text" class="header-key" placeholder="Content-Type">
+                                <input type="text" class="header-value" placeholder="application/json">
+                                <button type="button" class="remove-header-btn">×</button>
+                            </div>
+                        </div>
+                        <button type="button" id="add-header-btn" class="btn-secondary">Add Header</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="http-body-type">Body Type</label>
+                        <select id="http-body-type">
+                            <option value="none">None</option>
+                            <option value="json">JSON</option>
+                            <option value="text">Text</option>
+                            <option value="form">Form Data</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="http-body-group" style="display: none;">
+                        <label for="http-body">Request Body</label>
+                        <textarea id="http-body" placeholder='{"key": "value"}'></textarea>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button id="http-send-btn">Send Request</button>
+                        <button id="http-clear-btn" class="btn-secondary">Clear</button>
+                    </div>
+                </div>
+                
+                <div id="http-response-section" class="http-response-section" style="display: none;">
+                    <div class="section-divider"></div>
+                    <h3>Response</h3>
+                    
+                    <div class="response-status">
+                        <div class="time-group">
+                            <label>Status</label>
+                            <div class="output-group">
+                                <input type="text" id="http-status" readonly>
+                                <button class="copy-btn" data-target="http-status">Copy</button>
+                            </div>
+                        </div>
+                        <div class="time-group">
+                            <label>Time</label>
+                            <div class="output-group">
+                                <input type="text" id="http-time" readonly>
+                                <button class="copy-btn" data-target="http-time">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Response Headers</label>
+                        <pre id="http-response-headers" class="result-box"></pre>
+                        <button class="copy-btn" data-target="http-response-headers">Copy Headers</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Response Body</label>
+                        <pre id="http-response-body" class="result-box"></pre>
+                        <div class="button-group">
+                            <button id="http-format-response-btn">Format JSON</button>
+                            <button class="copy-btn" data-target="http-response-body">Copy Body</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="http-error" class="result-box" style="display: none;"></div>
             </div>
         </section>
     </main>
