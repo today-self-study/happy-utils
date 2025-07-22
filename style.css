@@ -561,12 +561,18 @@ select:focus {
     border-bottom-left-radius: 6px;
     border-left: 1.5px solid #333;
     align-self: flex-start;
-    min-width: 120px;
+    min-width: 150px;
+    width: 150px;
     height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
+    box-sizing: border-box;
+    overflow: visible;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .copy-btn[data-target="http-response-body"] {
