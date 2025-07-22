@@ -555,14 +555,29 @@ select:focus {
     background: #232323;
 }
 
-.copy-btn[data-target="http-response-headers"],
-.copy-btn[data-target="http-response-body"] {
+.copy-btn[data-target="http-response-headers"] {
     margin-top: 0.8rem;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     border-left: 1.5px solid #333;
     align-self: flex-start;
-    height: auto;
+    min-width: 120px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.copy-btn[data-target="http-response-body"] {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-left: 1.5px solid #333;
+    min-width: 100px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* HTTP Response sections consistent spacing */
@@ -572,6 +587,13 @@ select:focus {
 
 .http-response-section .form-group:last-child {
     margin-bottom: 0;
+}
+
+/* Response section labels consistent styling */
+.http-response-section .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
 }
 
 /* Ensure consistent button heights across HTTP Client */
@@ -590,13 +612,23 @@ select:focus {
     padding: 0.7rem 0.8rem;
 }
 
-/* Response status inputs consistent height */
+/* Response status inputs consistent height and alignment */
 .response-status input[type="text"] {
     min-height: 44px;
     height: 44px;
     line-height: 1.2;
     display: flex;
     align-items: center;
+    padding: 0.7rem 1rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Color coding for status */
+.response-status input[type="text"]:first-child {
+    color: #4caf50; /* Green for successful status codes */
 }
 
 /* HTTP Client specific input and select heights */
@@ -664,15 +696,55 @@ select:focus {
     max-height: 400px;
     overflow-y: auto;
     line-height: 1.4;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+    padding: 1rem;
+}
+
+/* Response Body specific styling */
+#http-response-body {
+    font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+}
+
+/* Response Headers specific styling */
+#http-response-headers {
+    font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+    font-size: 0.9rem;
+    color: #ffde59;
+    line-height: 1.6;
 }
 
 /* Button group consistent spacing */
 #http-client .button-group {
     margin-bottom: 1.5rem;
     margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 #http-client .button-group button {
     min-height: 44px;
     height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+/* Format JSON button specific styling */
+#http-format-response-btn {
+    background: #232323;
+    color: #ffde59;
+    border: 1.5px solid #333;
+    font-weight: 600;
+}
+
+#http-format-response-btn:hover {
+    background: #ffde59;
+    color: #232323;
+    border-color: #ffde59;
 } 
