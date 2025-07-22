@@ -445,6 +445,7 @@ footer {
     display: flex;
     gap: 0.5rem;
     align-items: stretch;
+    width: 100%;
 }
 
 .method-url-group select {
@@ -470,6 +471,8 @@ footer {
 .method-url-group input {
     margin-bottom: 0;
     flex: 1;
+    width: auto;
+    min-width: 0;
 }
 
 .header-row {
