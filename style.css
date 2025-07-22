@@ -462,6 +462,10 @@ footer {
     min-width: 100px;
     max-width: 150px;
     flex-shrink: 0;
+    min-height: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
 }
 
 .method-url-group select:focus {
@@ -492,31 +496,8 @@ footer {
     overflow: visible !important;
 }
 
-.header-row {
-    display: flex;
-    gap: 0.5rem;
-    align-items: stretch;
-    margin-bottom: 0.5rem;
-}
 
-.header-row input {
-    margin-bottom: 0;
-    flex: 1;
-}
 
-.remove-header-btn {
-    background: #ff6b6b;
-    color: #fff;
-    border: 1.5px solid #ff6b6b;
-    border-radius: 6px;
-    padding: 0.7rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    min-width: 40px;
-    flex-shrink: 0;
-    transition: background 0.18s, border 0.18s;
-}
 
 .remove-header-btn:hover {
     background: #ff5252;
@@ -534,11 +515,24 @@ footer {
 .response-status {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
 }
 
 .response-status .time-group {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.response-status .time-group label {
+    margin-bottom: 0.3rem;
+}
+
+.response-status .output-group {
+    display: flex;
+    align-items: stretch;
+    height: auto;
 }
 
 select {
@@ -563,8 +557,122 @@ select:focus {
 
 .copy-btn[data-target="http-response-headers"],
 .copy-btn[data-target="http-response-body"] {
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     border-left: 1.5px solid #333;
+    align-self: flex-start;
+    height: auto;
+}
+
+/* HTTP Response sections consistent spacing */
+.http-response-section .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.http-response-section .form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Ensure consistent button heights across HTTP Client */
+#http-client button,
+#http-client .copy-btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.5rem;
+    line-height: 1.2;
+}
+
+#http-client .copy-btn {
+    min-width: 80px;
+    padding: 0.7rem 0.8rem;
+}
+
+/* Response status inputs consistent height */
+.response-status input[type="text"] {
+    min-height: 44px;
+    height: 44px;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+}
+
+/* HTTP Client specific input and select heights */
+#http-client input[type="text"],
+#http-client select,
+#http-client textarea {
+    min-height: 44px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+#http-client select {
+    height: 44px;
+}
+
+#http-client textarea {
+    min-height: 120px;
+    height: auto;
+    resize: vertical;
+    align-items: flex-start;
+    padding-top: 0.7rem;
+}
+
+/* Header row consistent alignment */
+.header-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+    margin-bottom: 0.5rem;
+    min-height: 44px;
+}
+
+.header-row input {
+    margin-bottom: 0;
+    flex: 1;
+    min-height: 44px;
+    height: 44px;
+}
+
+.remove-header-btn {
+    background: #ff6b6b;
+    color: #fff;
+    border: 1.5px solid #ff6b6b;
+    border-radius: 6px;
+    padding: 0.7rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    transition: background 0.18s, border 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Response sections proper alignment */
+.http-response-section pre.result-box {
+    margin-top: 0.5rem;
+    margin-bottom: 0.8rem;
+    min-height: 120px;
+    max-height: 400px;
+    overflow-y: auto;
+    line-height: 1.4;
+}
+
+/* Button group consistent spacing */
+#http-client .button-group {
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+}
+
+#http-client .button-group button {
+    min-height: 44px;
+    height: 44px;
 } 

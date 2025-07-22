@@ -904,7 +904,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 min-width: 300px !important;
                 max-width: none !important;
                 margin-bottom: 0 !important;
-                display: block !important;
+                display: flex !important;
+                align-items: center !important;
                 visibility: visible !important;
                 opacity: 1 !important;
                 background: #232323 !important;
@@ -915,6 +916,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 font-size: 1rem !important;
                 box-sizing: border-box !important;
                 overflow: visible !important;
+                min-height: 44px !important;
+                height: 44px !important;
+                line-height: 1.2 !important;
             `;
             
             const parent = urlInput.parentElement;
