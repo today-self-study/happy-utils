@@ -893,4 +893,53 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Fix URL input field display issue
+    function fixUrlInputDisplay() {
+        const urlInput = document.getElementById('http-url');
+        if (urlInput) {
+            urlInput.style.cssText = `
+                flex: 1 1 300px !important;
+                width: 300px !important;
+                min-width: 300px !important;
+                max-width: none !important;
+                margin-bottom: 0 !important;
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                background: #232323 !important;
+                color: #e0e0e0 !important;
+                border: 1.5px solid #333 !important;
+                border-radius: 6px !important;
+                padding: 0.7rem 1rem !important;
+                font-size: 1rem !important;
+                box-sizing: border-box !important;
+                overflow: visible !important;
+            `;
+            
+            const parent = urlInput.parentElement;
+            if (parent) {
+                parent.style.cssText = `
+                    display: flex !important;
+                    gap: 0.5rem !important;
+                    align-items: stretch !important;
+                    width: 100% !important;
+                    flex-wrap: nowrap !important;
+                `;
+            }
+        }
+    }
+
+    // Apply fix when HTTP Client tab is clicked
+    const httpClientTab = document.querySelector('[data-tab="http"]');
+    if (httpClientTab) {
+        httpClientTab.addEventListener('click', () => {
+            setTimeout(fixUrlInputDisplay, 100);
+        });
+    }
+
+    // Apply fix on initial load if HTTP Client is active
+    if (window.location.hash === '#http' || document.querySelector('.tab-http.active')) {
+        setTimeout(fixUrlInputDisplay, 100);
+    }
 }); 
