@@ -556,23 +556,26 @@ select:focus {
 }
 
 .copy-btn[data-target="http-response-headers"] {
-    margin-top: 0.8rem;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-    border-left: 1.5px solid #333;
-    align-self: flex-start;
-    min-width: 150px;
-    width: 150px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    box-sizing: border-box;
-    overflow: visible;
-    padding: 0.7rem 1rem;
-    font-size: 1rem;
-    font-weight: 600;
+    margin-top: 0.8rem !important;
+    border-top-left-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+    border-left: 1.5px solid #333 !important;
+    align-self: flex-start !important;
+    min-width: 150px !important;
+    width: 150px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    padding: 0.7rem 1rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    text-overflow: clip !important;
+    word-wrap: normal !important;
+    word-break: normal !important;
 }
 
 .copy-btn[data-target="http-response-body"] {
