@@ -818,6 +818,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             httpResponseSection.style.display = 'block';
+            
+            // Fix Copy Headers button after response is displayed
+            setTimeout(fixCopyHeadersButton, 100);
 
         } catch (error) {
             console.error('Request failed:', error);
@@ -943,7 +946,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Apply fix on initial load if HTTP Client is active
-    if (window.location.hash === '#http' || document.querySelector('.tab-http.active')) {
-        setTimeout(fixUrlInputDisplay, 100);
+if (window.location.hash === '#http' || document.querySelector('.tab-http.active')) {
+    setTimeout(fixUrlInputDisplay, 100);
+}
+
+// Fix Copy Headers button text truncation
+function fixCopyHeadersButton() {
+    const copyHeadersBtn = document.querySelector('.copy-btn[data-target="http-response-headers"]');
+    if (copyHeadersBtn) {
+        copyHeadersBtn.style.cssText = `
+            margin-top: 0.8rem !important;
+            border-top-left-radius: 6px !important;
+            border-bottom-left-radius: 6px !important;
+            border-left: 1.5px solid #333 !important;
+            align-self: flex-start !important;
+            min-width: 150px !important;
+            width: 150px !important;
+            height: 44px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            white-space: nowrap !important;
+            box-sizing: border-box !important;
+            overflow: visible !important;
+            padding: 0.7rem 1rem !important;
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            text-overflow: clip !important;
+            word-wrap: normal !important;
+            word-break: normal !important;
+        `;
     }
+}
 }); 
