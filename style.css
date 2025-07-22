@@ -460,6 +460,7 @@ footer {
     font-weight: 600;
     cursor: pointer;
     min-width: 100px;
+    max-width: 150px;
     flex-shrink: 0;
 }
 
@@ -469,12 +470,23 @@ footer {
     background: #232323;
 }
 
-.method-url-group input[type="text"] {
-    margin-bottom: 0;
-    flex: 1;
+#http-url {
+    flex: 1 1 auto !important;
     width: auto !important;
-    min-width: 0;
-    max-width: none;
+    min-width: 200px !important;
+    max-width: none !important;
+    margin-bottom: 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: #232323 !important;
+    color: #e0e0e0 !important;
+    border: 1.5px solid #333 !important;
+    border-radius: 6px !important;
+    padding: 0.7rem 1rem !important;
+    font-size: 1rem !important;
+    font-family: inherit !important;
+    box-sizing: border-box !important;
 }
 
 .header-row {
