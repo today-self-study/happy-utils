@@ -1245,6 +1245,7 @@ function displayColorDetails(colors) {
         
         card.innerHTML = `
             <h5>Color ${index + 1}</h5>
+            <div class="color-swatch-small" style="background-color: ${color}" onclick="copyToClipboard('${color}')" title="Click to copy ${color}"></div>
             <div class="color-value">HEX: ${color}</div>
             <button class="copy-color-btn" onclick="copyToClipboard('${color}')">Copy HEX</button>
             <div class="color-value">RGB: ${rgb.r}, ${rgb.g}, ${rgb.b}</div>
@@ -1279,6 +1280,7 @@ function checkAccessibility(colors) {
         
         card.innerHTML = `
             <h5>Color ${index + 1} (${color})</h5>
+            <div class="color-swatch-small" style="background-color: ${color}" onclick="copyToClipboard('${color}')" title="Click to copy ${color}"></div>
             <div class="contrast-ratio">White Text: ${contrastWithWhite.toFixed(2)}:1</div>
             <div class="contrast-status ${whiteStatus.status}">${whiteStatus.text}</div>
             <div class="contrast-example white" style="background-color: ${color}">
