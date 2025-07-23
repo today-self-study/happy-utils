@@ -24,6 +24,7 @@
         <button class="tab-btn" data-tab="markdown">Markdown Viewer</button>
         <button class="tab-btn" data-tab="svg">SVG Viewer</button>
         <button class="tab-btn" data-tab="http">HTTP Client</button>
+        <button class="tab-btn" data-tab="color">Color Palette</button>
     </nav>
 
     <main>
@@ -295,6 +296,63 @@
                 </div>
                 
                 <div id="http-error" class="result-box" style="display: none;"></div>
+            </div>
+        </section>
+
+        <section id="color-palette" class="tool-section tab-content tab-color">
+            <h2>Color Palette Generator</h2>
+            <div class="tool-content">
+                <div class="color-controls">
+                    <div class="form-group">
+                        <label for="color-input">Base Color</label>
+                        <div class="color-input-group">
+                            <input type="color" id="color-picker" value="#ff6b6b">
+                            <input type="text" id="color-input" placeholder="#ff6b6b" value="#ff6b6b">
+                            <button id="random-color-btn" class="btn-secondary">🎲 Random</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="palette-type">Palette Type</label>
+                        <select id="palette-type">
+                            <option value="monochromatic">Monochromatic</option>
+                            <option value="analogous">Analogous</option>
+                            <option value="complementary">Complementary</option>
+                            <option value="triadic">Triadic</option>
+                            <option value="tetradic">Tetradic</option>
+                            <option value="split-complementary">Split Complementary</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="color-count">Number of Colors</label>
+                        <input type="range" id="color-count" min="3" max="12" value="5">
+                        <span id="color-count-display">5</span>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button id="generate-palette-btn">Generate Palette</button>
+                    <button id="export-palette-btn" class="btn-secondary">Export CSS</button>
+                    <button id="clear-palette-btn" class="btn-secondary">Clear</button>
+                </div>
+                
+                <div id="color-palette-result" class="color-palette-result" style="display: none;">
+                    <h3>Generated Palette</h3>
+                    <div id="palette-colors" class="palette-colors"></div>
+                    
+                    <div class="color-details">
+                        <h4>Color Details</h4>
+                        <div id="color-details-container" class="color-details-container"></div>
+                    </div>
+                    
+                    <div class="accessibility-check">
+                        <h4>Accessibility Check</h4>
+                        <div id="accessibility-results" class="accessibility-results"></div>
+                    </div>
+                </div>
+                
+                <div id="color-error" class="result-box" style="display: none;"></div>
             </div>
         </section>
     </main>

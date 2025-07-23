@@ -68,6 +68,18 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
     - CORS-aware with helpful error messages.
     - Copy response data with one-click buttons.
 
+10. **Color Palette Generator**
+    - Generate professional color palettes from a base color.
+    - Support for 6 palette types: Monochromatic, Analogous, Complementary, Triadic, Tetradic, and Split Complementary.
+    - Color picker with hex input and random color generation.
+    - Adjustable color count (3-12 colors).
+    - Real-time color format conversion (HEX, RGB, HSL).
+    - WCAG accessibility compliance checking with contrast ratios.
+    - Visual color swatches with hover effects.
+    - One-click copy for all color formats.
+    - Export palette as CSS variables.
+    - Detailed accessibility analysis for each color.
+
 ---
 
 ## 🖥️ UI/UX

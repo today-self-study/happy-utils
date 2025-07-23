@@ -978,4 +978,414 @@ function fixCopyHeadersButton() {
         `;
     }
 }
+
+// --- Color Palette Generator ---
+const colorPicker = document.getElementById('color-picker');
+const colorInput = document.getElementById('color-input');
+const randomColorBtn = document.getElementById('random-color-btn');
+const paletteType = document.getElementById('palette-type');
+const colorCount = document.getElementById('color-count');
+const colorCountDisplay = document.getElementById('color-count-display');
+const generatePaletteBtn = document.getElementById('generate-palette-btn');
+const exportPaletteBtn = document.getElementById('export-palette-btn');
+const clearPaletteBtn = document.getElementById('clear-palette-btn');
+const colorPaletteResult = document.getElementById('color-palette-result');
+const paletteColors = document.getElementById('palette-colors');
+const colorDetailsContainer = document.getElementById('color-details-container');
+const accessibilityResults = document.getElementById('accessibility-results');
+const colorError = document.getElementById('color-error');
+
+// Color utilities
+function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+function rgbToHsl(r, g, b) {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+    
+    if (max === min) {
+        h = s = 0;
+    } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        
+        switch (max) {
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+    
+    return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        l: Math.round(l * 100)
+    };
+}
+
+function hslToRgb(h, s, l) {
+    h /= 360;
+    s /= 100;
+    l /= 100;
+    
+    const hue2rgb = (p, q, t) => {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1/6) return p + (q - p) * 6 * t;
+        if (t < 1/2) return q;
+        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+        return p;
+    };
+    
+    let r, g, b;
+    
+    if (s === 0) {
+        r = g = b = l;
+    } else {
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+    
+    return {
+        r: Math.round(r * 255),
+        g: Math.round(g * 255),
+        b: Math.round(b * 255)
+    };
+}
+
+function getContrastRatio(color1, color2) {
+    const getLuminance = (color) => {
+        const rgb = hexToRgb(color);
+        const [r, g, b] = [rgb.r / 255, rgb.g / 255, rgb.b / 255].map(c => {
+            return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+        });
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+    
+    const l1 = getLuminance(color1);
+    const l2 = getLuminance(color2);
+    const lighter = Math.max(l1, l2);
+    const darker = Math.min(l1, l2);
+    
+    return (lighter + 0.05) / (darker + 0.05);
+}
+
+function generateMonochromaticPalette(baseColor, count) {
+    const rgb = hexToRgb(baseColor);
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+    const colors = [];
+    
+    for (let i = 0; i < count; i++) {
+        const lightness = 10 + (i * 80 / (count - 1));
+        const newHsl = { ...hsl, l: Math.max(5, Math.min(95, lightness)) };
+        const newRgb = hslToRgb(newHsl.h, newHsl.s, newHsl.l);
+        colors.push(rgbToHex(newRgb.r, newRgb.g, newRgb.b));
+    }
+    
+    return colors;
+}
+
+function generateAnalogousPalette(baseColor, count) {
+    const rgb = hexToRgb(baseColor);
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+    const colors = [];
+    
+    for (let i = 0; i < count; i++) {
+        const hue = (hsl.h + (i - Math.floor(count / 2)) * 30) % 360;
+        const newHsl = { ...hsl, h: hue < 0 ? hue + 360 : hue };
+        const newRgb = hslToRgb(newHsl.h, newHsl.s, newHsl.l);
+        colors.push(rgbToHex(newRgb.r, newRgb.g, newRgb.b));
+    }
+    
+    return colors;
+}
+
+function generateComplementaryPalette(baseColor, count) {
+    const rgb = hexToRgb(baseColor);
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+    const colors = [];
+    
+    for (let i = 0; i < count; i++) {
+        const hue = i % 2 === 0 ? hsl.h : (hsl.h + 180) % 360;
+        const lightness = 20 + (Math.floor(i / 2) * 60 / (Math.floor(count / 2) - 1));
+        const newHsl = { ...hsl, h: hue, l: Math.max(5, Math.min(95, lightness)) };
+        const newRgb = hslToRgb(newHsl.h, newHsl.s, newHsl.l);
+        colors.push(rgbToHex(newRgb.r, newRgb.g, newRgb.b));
+    }
+    
+    return colors;
+}
+
+function generateTriadicPalette(baseColor, count) {
+    const rgb = hexToRgb(baseColor);
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+    const colors = [];
+    
+    for (let i = 0; i < count; i++) {
+        const hue = (hsl.h + (i * 120)) % 360;
+        const lightness = 20 + (Math.floor(i / 3) * 60 / (Math.floor(count / 3) - 1));
+        const newHsl = { ...hsl, h: hue, l: Math.max(5, Math.min(95, lightness)) };
+        const newRgb = hslToRgb(newHsl.h, newHsl.s, newHsl.l);
+        colors.push(rgbToHex(newRgb.r, newRgb.g, newRgb.b));
+    }
+    
+    return colors;
+}
+
+function generateTetradicPalette(baseColor, count) {
+    const rgb = hexToRgb(baseColor);
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+    const colors = [];
+    
+    for (let i = 0; i < count; i++) {
+        const hue = (hsl.h + (i * 90)) % 360;
+        const lightness = 20 + (Math.floor(i / 4) * 60 / (Math.floor(count / 4) - 1));
+        const newHsl = { ...hsl, h: hue, l: Math.max(5, Math.min(95, lightness)) };
+        const newRgb = hslToRgb(newHsl.h, newHsl.s, newHsl.l);
+        colors.push(rgbToHex(newRgb.r, newRgb.g, newRgb.b));
+    }
+    
+    return colors;
+}
+
+function generateSplitComplementaryPalette(baseColor, count) {
+    const rgb = hexToRgb(baseColor);
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+    const colors = [];
+    
+    for (let i = 0; i < count; i++) {
+        let hue;
+        if (i === 0) {
+            hue = hsl.h;
+        } else if (i % 2 === 1) {
+            hue = (hsl.h + 150) % 360;
+        } else {
+            hue = (hsl.h + 210) % 360;
+        }
+        const lightness = 20 + (Math.floor(i / 3) * 60 / (Math.floor(count / 3) - 1));
+        const newHsl = { ...hsl, h: hue, l: Math.max(5, Math.min(95, lightness)) };
+        const newRgb = hslToRgb(newHsl.h, newHsl.s, newHsl.l);
+        colors.push(rgbToHex(newRgb.r, newRgb.g, newRgb.b));
+    }
+    
+    return colors;
+}
+
+function generatePalette(baseColor, type, count) {
+    switch (type) {
+        case 'monochromatic':
+            return generateMonochromaticPalette(baseColor, count);
+        case 'analogous':
+            return generateAnalogousPalette(baseColor, count);
+        case 'complementary':
+            return generateComplementaryPalette(baseColor, count);
+        case 'triadic':
+            return generateTriadicPalette(baseColor, count);
+        case 'tetradic':
+            return generateTetradicPalette(baseColor, count);
+        case 'split-complementary':
+            return generateSplitComplementaryPalette(baseColor, count);
+        default:
+            return generateMonochromaticPalette(baseColor, count);
+    }
+}
+
+function displayPalette(colors) {
+    paletteColors.innerHTML = '';
+    
+    colors.forEach((color, index) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'color-swatch';
+        swatch.onclick = () => copyToClipboard(color);
+        
+        const rgb = hexToRgb(color);
+        const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+        
+        swatch.innerHTML = `
+            <div class="color-preview" style="background-color: ${color}"></div>
+            <div class="color-info">
+                <div class="color-hex">${color}</div>
+                <div class="color-rgb">RGB(${rgb.r}, ${rgb.g}, ${rgb.b})</div>
+                <div class="color-hsl">HSL(${hsl.h}°, ${hsl.s}%, ${hsl.l}%)</div>
+            </div>
+        `;
+        
+        paletteColors.appendChild(swatch);
+    });
+}
+
+function displayColorDetails(colors) {
+    colorDetailsContainer.innerHTML = '';
+    
+    colors.forEach((color, index) => {
+        const rgb = hexToRgb(color);
+        const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+        
+        const card = document.createElement('div');
+        card.className = 'color-detail-card';
+        
+        card.innerHTML = `
+            <h5>Color ${index + 1}</h5>
+            <div class="color-value">HEX: ${color}</div>
+            <button class="copy-color-btn" onclick="copyToClipboard('${color}')">Copy HEX</button>
+            <div class="color-value">RGB: ${rgb.r}, ${rgb.g}, ${rgb.b}</div>
+            <button class="copy-color-btn" onclick="copyToClipboard('${rgb.r}, ${rgb.g}, ${rgb.b}')">Copy RGB</button>
+            <div class="color-value">HSL: ${hsl.h}°, ${hsl.s}%, ${hsl.l}%</div>
+            <button class="copy-color-btn" onclick="copyToClipboard('${hsl.h}°, ${hsl.s}%, ${hsl.l}%')">Copy HSL</button>
+        `;
+        
+        colorDetailsContainer.appendChild(card);
+    });
+}
+
+function checkAccessibility(colors) {
+    accessibilityResults.innerHTML = '';
+    
+    colors.forEach((color, index) => {
+        const card = document.createElement('div');
+        card.className = 'accessibility-card';
+        
+        const contrastWithWhite = getContrastRatio(color, '#ffffff');
+        const contrastWithBlack = getContrastRatio(color, '#000000');
+        
+        const getContrastStatus = (ratio) => {
+            if (ratio >= 7) return { status: 'pass', text: 'Excellent (AAA)' };
+            if (ratio >= 4.5) return { status: 'pass', text: 'Good (AA)' };
+            if (ratio >= 3) return { status: 'warning', text: 'Fair (A)' };
+            return { status: 'fail', text: 'Poor' };
+        };
+        
+        const whiteStatus = getContrastStatus(contrastWithWhite);
+        const blackStatus = getContrastStatus(contrastWithBlack);
+        
+        card.innerHTML = `
+            <h5>Color ${index + 1} (${color})</h5>
+            <div class="contrast-ratio">White Text: ${contrastWithWhite.toFixed(2)}:1</div>
+            <div class="contrast-status ${whiteStatus.status}">${whiteStatus.text}</div>
+            <div class="contrast-example white" style="background-color: ${color}">
+                Sample text on ${color}
+            </div>
+            <div class="contrast-ratio">Black Text: ${contrastWithBlack.toFixed(2)}:1</div>
+            <div class="contrast-status ${blackStatus.status}">${blackStatus.text}</div>
+            <div class="contrast-example black" style="background-color: ${color}">
+                Sample text on ${color}
+            </div>
+        `;
+        
+        accessibilityResults.appendChild(card);
+    });
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        showMessage(colorError, `Copied: ${text}`, false);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        showMessage(colorError, 'Failed to copy to clipboard', true);
+    });
+}
+
+function exportCSS(colors) {
+    const css = colors.map((color, index) => {
+        const rgb = hexToRgb(color);
+        return `/* Color ${index + 1} */
+--color-${index + 1}: ${color};
+--color-${index + 1}-rgb: ${rgb.r}, ${rgb.g}, ${rgb.b};`;
+    }).join('\n\n');
+    
+    const fullCSS = `:root {
+${css}
+}`;
+    
+    copyToClipboard(fullCSS);
+    showMessage(colorError, 'CSS variables copied to clipboard!', false);
+}
+
+// Event listeners
+colorPicker.addEventListener('input', (e) => {
+    colorInput.value = e.target.value.toUpperCase();
+});
+
+colorInput.addEventListener('input', (e) => {
+    const value = e.target.value;
+    if (/^#[0-9A-F]{6}$/i.test(value)) {
+        colorPicker.value = value;
+    }
+});
+
+randomColorBtn.addEventListener('click', () => {
+    const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    colorPicker.value = randomColor;
+    colorInput.value = randomColor.toUpperCase();
+});
+
+colorCount.addEventListener('input', (e) => {
+    colorCountDisplay.textContent = e.target.value;
+});
+
+generatePaletteBtn.addEventListener('click', () => {
+    const baseColor = colorInput.value;
+    const type = paletteType.value;
+    const count = parseInt(colorCount.value);
+    
+    if (!/^#[0-9A-F]{6}$/i.test(baseColor)) {
+        showMessage(colorError, 'Please enter a valid hex color (e.g., #ff6b6b)', true);
+        return;
+    }
+    
+    try {
+        const colors = generatePalette(baseColor, type, count);
+        displayPalette(colors);
+        displayColorDetails(colors);
+        checkAccessibility(colors);
+        colorPaletteResult.style.display = 'block';
+        colorError.style.display = 'none';
+    } catch (error) {
+        showMessage(colorError, 'Error generating palette: ' + error.message, true);
+    }
+});
+
+exportPaletteBtn.addEventListener('click', () => {
+    const colors = Array.from(paletteColors.querySelectorAll('.color-swatch')).map(swatch => {
+        return swatch.querySelector('.color-hex').textContent;
+    });
+    
+    if (colors.length > 0) {
+        exportCSS(colors);
+    } else {
+        showMessage(colorError, 'Generate a palette first', true);
+    }
+});
+
+clearPaletteBtn.addEventListener('click', () => {
+    colorInput.value = '#ff6b6b';
+    colorPicker.value = '#ff6b6b';
+    paletteType.value = 'monochromatic';
+    colorCount.value = 5;
+    colorCountDisplay.textContent = '5';
+    colorPaletteResult.style.display = 'none';
+    colorError.style.display = 'none';
+});
+
+// Generate initial palette
+generatePaletteBtn.click();
 }); 
