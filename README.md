@@ -12,7 +12,7 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
 
 - **Modern, dark geek UI** inspired by [tss](https://today-self-study.github.io/tss/), with monospace fonts and minimal design.
 - **Responsive & Mobile-friendly:** All tools are centered, with proper padding and spacing for any device.
-- **Tab Navigation:** Instantly switch between tools using the top tab bar.
+- **Tab Navigation:** Instantly switch between tools using the top tab bar with intuitive icons and responsive design.
 
 ### Included Tools
 
@@ -85,7 +85,7 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
 ## 🖥️ UI/UX
 
 - **Dark, minimal, and geeky**: Monospace font, yellow highlights, and a simple smiley favicon.
-- **Tab navigation**: Switch tools without page reload.
+- **Tab navigation**: Switch tools without page reload using intuitive icons and responsive design.
 - **Consistent copy UX**: All copy buttons show "Copied!" in the center, then revert.
 - **Responsive**: Looks great on both desktop and mobile, with balanced side paddings.
 
