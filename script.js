@@ -494,6 +494,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Tab Navigation ---
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
+    const tabNav = document.querySelector('.tab-nav');
+    
+    // Tab switching functionality
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             // Remove active from all
@@ -505,6 +508,19 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.tab-' + tab).classList.add('active');
         });
     });
+    
+    // Scroll indicator functionality
+    function updateScrollIndicator() {
+        if (tabNav.scrollWidth > tabNav.clientWidth) {
+            tabNav.classList.add('scrollable');
+        } else {
+            tabNav.classList.remove('scrollable');
+        }
+    }
+    
+    // Check on load and resize
+    window.addEventListener('load', updateScrollIndicator);
+    window.addEventListener('resize', updateScrollIndicator);
 
     // --- Markdown Viewer ---
     const markdownInput = document.getElementById('markdown-input');
