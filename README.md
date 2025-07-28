@@ -80,6 +80,13 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
     - Export palette as CSS variables.
     - Detailed accessibility analysis for each color.
 
+11. **HTML Viewer & Preview**
+    - Write or paste HTML code and see a live preview.
+    - Real-time rendering using iframe for safe HTML execution.
+    - Perfect for testing HTML snippets, templates, and web components.
+    - Copy HTML code or clear the input with one click.
+    - Error handling for invalid HTML with helpful messages.
+
 ---
 
 ## 🖥️ UI/UX
