@@ -1406,4 +1406,61 @@ clearPaletteBtn.addEventListener('click', () => {
 
 // Generate initial palette
 generatePaletteBtn.click();
+
+    // --- HTML Viewer ---
+    const htmlInput = document.getElementById('html-input');
+    const htmlPreview = document.getElementById('html-preview');
+    const htmlCopyBtn = document.getElementById('html-copy-btn');
+    const htmlClearBtn = document.getElementById('html-clear-btn');
+
+    function updateHtmlPreview() {
+        const htmlCode = htmlInput.value.trim();
+        if (!htmlCode) {
+            htmlPreview.innerHTML = '<div class="preview-placeholder">Enter HTML code to see preview</div>';
+            return;
+        }
+
+        try {
+            // Create a blob URL for the HTML content
+            const blob = new Blob([htmlCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            // Create iframe for safe HTML rendering
+            htmlPreview.innerHTML = `<iframe src="${url}" onload="this.parentElement.style.background='#fff'"></iframe>`;
+            
+            // Clean up the blob URL after a delay
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+            }, 1000);
+            
+        } catch (error) {
+            htmlPreview.innerHTML = `<div class="preview-error">Error rendering HTML: ${error.message}</div>`;
+        }
+    }
+
+    if (htmlInput) {
+        htmlInput.addEventListener('input', updateHtmlPreview);
+        
+        htmlCopyBtn.addEventListener('click', () => {
+            if (!htmlInput.value) return;
+            navigator.clipboard.writeText(htmlInput.value)
+                .then(() => {
+                    const originalText = htmlCopyBtn.textContent;
+                    htmlCopyBtn.textContent = 'Copied!';
+                    htmlCopyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        htmlCopyBtn.textContent = originalText;
+                        htmlCopyBtn.classList.remove('copied');
+                    }, 1200);
+                });
+        });
+
+        htmlClearBtn.addEventListener('click', () => {
+            htmlInput.value = '';
+            updateHtmlPreview();
+        });
+
+        // Initialize preview
+        updateHtmlPreview();
+    }
 }); 

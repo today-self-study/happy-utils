@@ -55,6 +55,10 @@
             <span class="tab-icon">🎨</span>
             <span class="tab-text">Colors</span>
         </button>
+        <button class="tab-btn" data-tab="html">
+            <span class="tab-icon">🌐</span>
+            <span class="tab-text">HTML</span>
+        </button>
     </nav>
 
     <main>
@@ -383,6 +387,21 @@
                 </div>
                 
                 <div id="color-error" class="result-box" style="display: none;"></div>
+            </div>
+        </section>
+
+        <section id="html-viewer" class="tool-section tab-content tab-html">
+            <h2>HTML Viewer & Preview</h2>
+            <div class="tool-content">
+                <div class="form-group">
+                    <label for="html-input">Enter HTML Code</label>
+                    <textarea id="html-input" placeholder="<html>&#10;<head>&#10;  <title>My Page</title>&#10;</head>&#10;<body>&#10;  <h1>Hello World!</h1>&#10;  <p>This is a sample HTML page.</p>&#10;</body>&#10;</html>"></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="html-copy-btn">Copy HTML</button>
+                    <button id="html-clear-btn" class="btn-secondary">Clear</button>
+                </div>
+                <div id="html-preview" class="result-box html-preview"></div>
             </div>
         </section>
     </main>
