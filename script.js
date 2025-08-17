@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlInput = document.getElementById('url-input');
     const urlEncodeBtn = document.getElementById('url-encode-btn');
     const urlDecodeBtn = document.getElementById('url-decode-btn');
+    const urlCopyBtn = document.getElementById('url-copy-btn');
     const urlClearBtn = document.getElementById('url-clear-btn');
     const urlResultBox = document.getElementById('url-result');
 
@@ -155,6 +156,24 @@ document.addEventListener('DOMContentLoaded', () => {
     urlClearBtn.addEventListener('click', () => {
         urlInput.value = '';
     });
+
+    // Copy URL/text
+    if (urlCopyBtn) {
+        urlCopyBtn.addEventListener('click', () => {
+            if (!urlInput.value) return;
+            navigator.clipboard.writeText(urlInput.value)
+                .then(() => {
+                    const originalText = urlCopyBtn.textContent;
+                    urlCopyBtn.textContent = 'Copied!';
+                    urlCopyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        urlCopyBtn.textContent = originalText;
+                        urlCopyBtn.classList.remove('copied');
+                    }, 1200);
+                })
+                .catch(err => console.error('Failed to copy: ', err));
+        });
+    }
 
     // --- Base64 Encoder/Decoder ---
     const base64Input = document.getElementById('base64-input');
@@ -473,6 +492,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const jsonInput = document.getElementById('json-input');
     const jsonFormatBtn = document.getElementById('json-format-btn');
     const jsonClearBtn = document.getElementById('json-clear-btn');
+    const jsonCopyBtn = document.getElementById('json-copy-btn');
     const jsonOutput = document.getElementById('json-output');
 
     jsonFormatBtn.addEventListener('click', () => {
@@ -490,6 +510,25 @@ document.addEventListener('DOMContentLoaded', () => {
         jsonInput.value = '';
         jsonOutput.textContent = '';
     });
+
+    // Copy formatted JSON (fallback to raw input)
+    if (jsonCopyBtn) {
+        jsonCopyBtn.addEventListener('click', () => {
+            const textToCopy = jsonOutput.textContent?.trim() ? jsonOutput.textContent : jsonInput.value;
+            if (!textToCopy) return;
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    const originalText = jsonCopyBtn.textContent;
+                    jsonCopyBtn.textContent = 'Copied!';
+                    jsonCopyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        jsonCopyBtn.textContent = originalText;
+                        jsonCopyBtn.classList.remove('copied');
+                    }, 1200);
+                })
+                .catch(err => console.error('Failed to copy: ', err));
+        });
+    }
 
     // --- Tab Navigation ---
     const tabBtns = document.querySelectorAll('.tab-btn');
