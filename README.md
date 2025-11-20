@@ -10,9 +10,16 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
 
 ## ✨ Features
 
-- **Modern, dark geek UI** inspired by [tss](https://today-self-study.github.io/tss/), with monospace fonts and minimal design.
+- **Premium glass UI** with Inter + JetBrains Mono, hero spotlight, and stat cards that establish immediate credibility.
 - **Responsive & Mobile-friendly:** All tools are centered, with proper padding and spacing for any device.
 - **Tab Navigation:** Instantly switch between tools using the top tab bar with intuitive icons and responsive design.
+
+### 🆕 November 2025 Refresh
+
+- Rebuilt the HTML skeleton with a semantic `<head>`, hero header, and descriptive meta tags.
+- Introduced a glassmorphism shell, stat cards, pill CTAs, and refreshed typography for a modern feel.
+- Hardened the CSS token system (`:root` custom properties) to avoid regressions that previously blanked the theme variables.
+- Expanded README UI notes to reflect the new interaction model.
 
 ### Included Tools
 
@@ -91,10 +98,11 @@ This project is built with vanilla HTML, CSS, and JavaScript, and is hosted via 
 
 ## 🖥️ UI/UX
 
-- **Dark, minimal, and geeky**: Monospace font, yellow highlights, and a simple smiley favicon.
-- **Tab navigation**: Switch tools without page reload using intuitive icons and responsive design.
-- **Consistent copy UX**: All copy buttons show "Copied!" in the center, then revert.
-- **Responsive**: Looks great on both desktop and mobile, with balanced side paddings.
+- **Hero spotlight**: Title, subtitle, call-to-action chips, and stat cards introduce the toolkit like a SaaS landing page.
+- **Glass tabs**: Scrollable pill buttons keep the section switching lightweight yet premium.
+- **Consistent copy UX**: All copy buttons show "Copied!" momentarily, reinforcing the action.
+- **Live previews**: Markdown/SVG/HTML viewers render on white cards for contrast.
+- **Responsive**: Breakpoints tighten paddings, stack hero actions, and keep tabs scrollable.
 
 ---
 

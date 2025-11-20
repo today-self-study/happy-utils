@@ -1,402 +1,517 @@
 <!DOCTYPE html>
-    </header>
-
-    <nav class="tab-nav">
-        <button class="tab-btn active" data-tab="epoch">
-            <span class="tab-icon">⏰</span>
-            <span class="tab-text">Epoch</span>
-        </button>
-        <button class="tab-btn" data-tab="url">
-            <span class="tab-icon">🔗</span>
-            <span class="tab-text">URL</span>
-        </button>
-        <button class="tab-btn" data-tab="base64">
-            <span class="tab-icon">📝</span>
-            <span class="tab-text">Base64</span>
-        </button>
-        <button class="tab-btn" data-tab="hash">
-            <span class="tab-icon">🔐</span>
-            <span class="tab-text">Hash</span>
-        </button>
-        <button class="tab-btn" data-tab="diff">
-            <span class="tab-icon">🔍</span>
-            <span class="tab-text">Diff</span>
-        </button>
-        <button class="tab-btn" data-tab="json">
-            <span class="tab-icon">📄</span>
-            <span class="tab-text">JSON</span>
-        </button>
-        <button class="tab-btn" data-tab="markdown">
-            <span class="tab-icon">📖</span>
-            <span class="tab-text">Markdown</span>
-        </button>
-        <button class="tab-btn" data-tab="svg">
-            <span class="tab-icon">🎨</span>
-            <span class="tab-text">SVG</span>
-        </button>
-        <button class="tab-btn" data-tab="http">
-            <span class="tab-icon">🌐</span>
-            <span class="tab-text">HTTP</span>
-        </button>
-        <button class="tab-btn" data-tab="color">
-            <span class="tab-icon">🎨</span>
-            <span class="tab-text">Colors</span>
-        </button>
-        <button class="tab-btn" data-tab="html">
-            <span class="tab-icon">🌐</span>
-            <span class="tab-text">HTML</span>
-        </button>
-    </nav>
-
-    <main>
-        <section id="epoch-converter" class="tool-section tab-content tab-epoch active">
-            <h2>Epoch & Unix Timestamp Converter</h2>
-            <div class="tool-content">
-                
-                <div class="current-time-display">
-                    <div class="time-group">
-                        <label>Epoch Timestamp</label>
-                        <div class="output-group">
-                            <input type="text" id="current-epoch-display" placeholder="Enter epoch timestamp">
-                            <button class="copy-btn" data-target="current-epoch-display">Copy</button>
-                        </div>
-                    </div>
-                    <div class="time-group">
-                        <label>UTC</label>
-                        <div class="output-group">
-                            <input type="text" id="current-utc-display" placeholder="Enter UTC date">
-                            <button class="copy-btn" data-target="current-utc-display">Copy</button>
-                        </div>
-                    </div>
-                    <div class="time-group">
-                        <label>Your Local Time</label>
-                        <div class="output-group">
-                            <input type="text" id="current-local-display" placeholder="Enter local date">
-                            <button class="copy-btn" data-target="current-local-display">Copy</button>
-                        </div>
-                    </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Happy Utils – a polished toolbox that bundles developer utilities for encoding, hashing, diffing, HTTP requests, colors, and more.">
+    <meta name="theme-color" content="#0f172a">
+    <title>Happy Utils · Developer Swiss-Army Toolkit</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-grid" aria-hidden="true"></div>
+    <div class="app-shell">
+        <header class="hero">
+            <div class="hero-copy">
+                <p class="hero-eyebrow">Happy Utils · 11 essential tools</p>
+                <h1>Modern utilities built for everyday developer work</h1>
+                <p class="hero-subtitle">
+                    Convert timestamps, encode strings, craft palettes, inspect HTTP responses, or preview markup –
+                    all inside a single premium workspace.
+                </p>
+                <div class="hero-actions">
+                    <a class="primary-pill" href="#epoch-converter">Start converting</a>
+                    <a class="ghost-pill" href="https://today-self-study.github.io/happy-utils/" target="_blank" rel="noreferrer">View live demo</a>
                 </div>
-                <div id="epoch-result" class="result-box" style="display: none;"></div>
             </div>
-        </section>
-
-        <section id="url-encoder" class="tool-section tab-content tab-url">
-            <h2>URL Encoder / Decoder</h2>
-            <div class="tool-content">
-                <div class="form-group">
-                    <label for="url-input">Text to Encode / Decode</label>
-                    <textarea id="url-input" placeholder="Paste your URL or text here..."></textarea>
+            <div class="hero-stats" aria-label="Product highlights">
+                <div class="stat-card">
+                    <span class="stat-value">11</span>
+                    <span class="stat-label">Utilities</span>
                 </div>
-                <div class="button-group">
-                    <button id="url-encode-btn">Encode</button>
-                    <button id="url-decode-btn">Decode</button>
-                    <button id="url-copy-btn">Copy</button>
-                    <button id="url-clear-btn" class="btn-secondary">Clear</button>
+                <div class="stat-card">
+                    <span class="stat-value">WCAG</span>
+                    <span class="stat-label">Accessible UI</span>
                 </div>
-                <div id="url-result" class="result-box" style="display: none;"></div>
+                <div class="stat-card">
+                    <span class="stat-value">100%</span>
+                    <span class="stat-label">Client-side</span>
+                </div>
             </div>
-        </section>
+        </header>
 
-        <section id="base64-encoder" class="tool-section tab-content tab-base64">
-            <h2>Base64 Encoder / Decoder</h2>
-            <div class="tool-content">
-                <div class="form-group">
-                    <label for="base64-input">Text to Encode / Decode</label>
-                    <textarea id="base64-input" placeholder="Paste your text or Base64 string here..."></textarea>
-                </div>
-                <div class="button-group">
-                    <button id="base64-encode-btn">Encode</button>
-                    <button id="base64-decode-btn">Decode</button>
-                    <button id="base64-copy-btn">Copy</button>
-                    <button id="base64-clear-btn" class="btn-secondary">Clear</button>
-                </div>
-                <div id="base64-result" class="result-box" style="display: none;"></div>
-            </div>
-        </section>
+        <nav class="tab-nav" aria-label="Utility navigation">
+            <button class="tab-btn active" data-tab="epoch">
+                <span class="tab-icon">⏰</span>
+                <span class="tab-text">Epoch</span>
+            </button>
+            <button class="tab-btn" data-tab="url">
+                <span class="tab-icon">🔗</span>
+                <span class="tab-text">URL</span>
+            </button>
+            <button class="tab-btn" data-tab="base64">
+                <span class="tab-icon">📝</span>
+                <span class="tab-text">Base64</span>
+            </button>
+            <button class="tab-btn" data-tab="hash">
+                <span class="tab-icon">🔐</span>
+                <span class="tab-text">Hash</span>
+            </button>
+            <button class="tab-btn" data-tab="diff">
+                <span class="tab-icon">🔍</span>
+                <span class="tab-text">Diff</span>
+            </button>
+            <button class="tab-btn" data-tab="json">
+                <span class="tab-icon">📄</span>
+                <span class="tab-text">JSON</span>
+            </button>
+            <button class="tab-btn" data-tab="markdown">
+                <span class="tab-icon">📖</span>
+                <span class="tab-text">Markdown</span>
+            </button>
+            <button class="tab-btn" data-tab="svg">
+                <span class="tab-icon">🎨</span>
+                <span class="tab-text">SVG</span>
+            </button>
+            <button class="tab-btn" data-tab="http">
+                <span class="tab-icon">🌐</span>
+                <span class="tab-text">HTTP</span>
+            </button>
+            <button class="tab-btn" data-tab="color">
+                <span class="tab-icon">🎨</span>
+                <span class="tab-text">Colors</span>
+            </button>
+            <button class="tab-btn" data-tab="html">
+                <span class="tab-icon">🌐</span>
+                <span class="tab-text">HTML</span>
+            </button>
+        </nav>
 
-        <section id="hash-generator" class="tool-section tab-content tab-hash">
-            <h2>Hash Generator</h2>
-            <div class="tool-content">
-                <div class="form-group">
-                    <label for="hash-input">Text to Hash</label>
-                    <textarea id="hash-input" placeholder="Enter text to generate hash..."></textarea>
-                </div>
-                <div class="button-group">
-                    <button id="hash-generate-btn">Generate Hashes</button>
-                    <button id="hash-clear-btn" class="btn-secondary">Clear</button>
-                </div>
-                
-                <div class="hash-results">
-                    <div class="time-group">
-                        <label>MD5</label>
-                        <div class="output-group">
-                            <input type="text" id="hash-md5-result" placeholder="MD5 hash will appear here" readonly>
-                            <button class="copy-btn" data-target="hash-md5-result">Copy</button>
-                        </div>
+        <main>
+            <section id="epoch-converter" class="tool-section tab-content tab-epoch active">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">Time travel ready</p>
+                        <h2>Epoch & Unix Timestamp Converter</h2>
                     </div>
-                    <div class="time-group">
-                        <label>SHA-1</label>
-                        <div class="output-group">
-                            <input type="text" id="hash-sha1-result" placeholder="SHA-1 hash will appear here" readonly>
-                            <button class="copy-btn" data-target="hash-sha1-result">Copy</button>
-                        </div>
-                    </div>
-                    <div class="time-group">
-                        <label>SHA-256</label>
-                        <div class="output-group">
-                            <input type="text" id="hash-sha256-result" placeholder="SHA-256 hash will appear here" readonly>
-                            <button class="copy-btn" data-target="hash-sha256-result">Copy</button>
-                        </div>
-                    </div>
-                    <div class="time-group">
-                        <label>SHA-512</label>
-                        <div class="output-group">
-                            <input type="text" id="hash-sha512-result" placeholder="SHA-512 hash will appear here" readonly>
-                            <button class="copy-btn" data-target="hash-sha512-result">Copy</button>
-                        </div>
-                    </div>
+                    <p class="section-subtitle">Keep epoch, UTC, and local time in sync with one edit.</p>
                 </div>
-                <div id="hash-result" class="result-box" style="display: none;"></div>
-            </div>
-        </section>
-
-        <section id="diff-checker" class="tool-section tab-content tab-diff">
-            <h2>Text Diff Checker</h2>
-            <div class="tool-content">
-                <div class="form-group">
-                    <label for="diff-original">Original Text</label>
-                    <textarea id="diff-original" placeholder="Paste your original text here..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="diff-new">New Text</label>
-                    <textarea id="diff-new" placeholder="Paste your new text here..."></textarea>
-                </div>
-                <div class="button-group">
-                    <button id="diff-compare-btn">Compare</button>
-                    <button id="diff-copy-btn">Copy Result</button>
-                    <button id="diff-clear-btn" class="btn-secondary">Clear</button>
-                </div>
-                <div id="diff-result" class="result-box" style="display: none;"></div>
-            </div>
-        </section>
-
-        <section id="json-viewer" class="tool-section tab-content tab-json">
-            <h2>JSON Formatter & Viewer</h2>
-            <div class="tool-content">
-                <div class="form-group">
-                    <label for="json-input">Paste your JSON here</label>
-                    <textarea id="json-input" placeholder='{ "hello": "world" }'></textarea>
-                </div>
-                <div class="button-group">
-                    <button id="json-format-btn">Format / Beautify</button>
-                    <button id="json-copy-btn">Copy</button>
-                    <button id="json-clear-btn" class="btn-secondary">Clear</button>
-                </div>
-                <pre id="json-output" class="result-box"></pre>
-            </div>
-        </section>
-
-        <section id="markdown-viewer" class="tool-section tab-content tab-markdown">
-            <h2>Markdown Viewer</h2>
-            <div class="tool-content">
-                <div class="form-group">
-                    <label for="markdown-input">Enter Markdown</label>
-                    <textarea id="markdown-input" placeholder="# Hello, Markdown!\n\n- List item\n- **Bold**\n- [Link](https://example.com)"></textarea>
-                </div>
-                <div class="button-group">
-                    <button id="markdown-copy-btn">Copy HTML</button>
-                    <button id="markdown-clear-btn" class="btn-secondary">Clear</button>
-                </div>
-                <div id="markdown-preview" class="result-box markdown-preview"></div>
-            </div>
-        </section>
-
-        <section id="svg-viewer" class="tool-section tab-content tab-svg">
-            <h2>SVG Viewer</h2>
-            <div class="tool-content">
-                <div class="form-group">
-                    <label for="svg-input">Enter SVG Code</label>
-                    <textarea id="svg-input" placeholder="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;>&#10;  <circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot; fill=&quot;#ffde59&quot; stroke=&quot;#333&quot; stroke-width=&quot;2&quot;/>&#10;</svg>"></textarea>
-                </div>
-                <div class="button-group">
-                    <button id="svg-copy-btn">Copy SVG</button>
-                    <button id="svg-clear-btn" class="btn-secondary">Clear</button>
-                </div>
-                <div id="svg-preview" class="result-box svg-preview"></div>
-            </div>
-        </section>
-
-        <section id="http-client" class="tool-section tab-content tab-http">
-            <h2>HTTP Client</h2>
-            <div class="tool-content">
-                <div class="http-request-section">
-                    <div class="form-group">
-                        <label for="http-method">Method & URL</label>
-                        <div class="method-url-group">
-                            <select id="http-method">
-                                <option value="GET">GET</option>
-                                <option value="POST">POST</option>
-                                <option value="PUT">PUT</option>
-                                <option value="DELETE">DELETE</option>
-                                <option value="PATCH">PATCH</option>
-                                <option value="HEAD">HEAD</option>
-                                <option value="OPTIONS">OPTIONS</option>
-                            </select>
-                            <input type="text" id="http-url" placeholder="https://api.example.com/endpoint">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Headers</label>
-                        <div id="http-headers-container">
-                            <div class="header-row">
-                                <input type="text" class="header-key" placeholder="Content-Type">
-                                <input type="text" class="header-value" placeholder="application/json">
-                                <button type="button" class="remove-header-btn">×</button>
+                <div class="tool-content">
+                    <div class="current-time-display">
+                        <div class="time-group">
+                            <label>Epoch Timestamp</label>
+                            <div class="output-group">
+                                <input type="text" id="current-epoch-display" placeholder="Enter epoch timestamp">
+                                <button class="copy-btn" data-target="current-epoch-display">Copy</button>
                             </div>
                         </div>
-                        <button type="button" id="add-header-btn" class="btn-secondary">Add Header</button>
+                        <div class="time-group">
+                            <label>UTC</label>
+                            <div class="output-group">
+                                <input type="text" id="current-utc-display" placeholder="Enter UTC date">
+                                <button class="copy-btn" data-target="current-utc-display">Copy</button>
+                            </div>
+                        </div>
+                        <div class="time-group">
+                            <label>Your Local Time</label>
+                            <div class="output-group">
+                                <input type="text" id="current-local-display" placeholder="Enter local date">
+                                <button class="copy-btn" data-target="current-local-display">Copy</button>
+                            </div>
+                        </div>
                     </div>
-                    
+                    <div id="epoch-result" class="result-box" style="display: none;"></div>
+                </div>
+            </section>
+
+            <section id="url-encoder" class="tool-section tab-content tab-url">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">Link safe</p>
+                        <h2>URL Encoder / Decoder</h2>
+                    </div>
+                    <p class="section-subtitle">Protect query params and decode them instantly.</p>
+                </div>
+                <div class="tool-content">
                     <div class="form-group">
-                        <label for="http-body-type">Body Type</label>
-                        <select id="http-body-type">
-                            <option value="none">None</option>
-                            <option value="json">JSON</option>
-                            <option value="text">Text</option>
-                            <option value="form">Form Data</option>
-                        </select>
+                        <label for="url-input">Text to Encode / Decode</label>
+                        <textarea id="url-input" placeholder="Paste your URL or text here..."></textarea>
                     </div>
-                    
-                    <div class="form-group" id="http-body-group" style="display: none;">
-                        <label for="http-body">Request Body</label>
-                        <textarea id="http-body" placeholder='{"key": "value"}'></textarea>
-                    </div>
-                    
                     <div class="button-group">
-                        <button id="http-send-btn">Send Request</button>
-                        <button id="http-clear-btn" class="btn-secondary">Clear</button>
+                        <button id="url-encode-btn">Encode</button>
+                        <button id="url-decode-btn">Decode</button>
+                        <button id="url-copy-btn">Copy</button>
+                        <button id="url-clear-btn" class="btn-secondary">Clear</button>
                     </div>
+                    <div id="url-result" class="result-box" style="display: none;"></div>
                 </div>
-                
-                <div id="http-response-section" class="http-response-section" style="display: none;">
-                    <div class="section-divider"></div>
-                    <h3>Response</h3>
-                    
-                    <div class="response-status">
+            </section>
+
+            <section id="base64-encoder" class="tool-section tab-content tab-base64">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">Payload ready</p>
+                        <h2>Base64 Encoder / Decoder</h2>
+                    </div>
+                    <p class="section-subtitle">Quick conversions with instant validation.</p>
+                </div>
+                <div class="tool-content">
+                    <div class="form-group">
+                        <label for="base64-input">Text to Encode / Decode</label>
+                        <textarea id="base64-input" placeholder="Paste your text or Base64 string here..."></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="base64-encode-btn">Encode</button>
+                        <button id="base64-decode-btn">Decode</button>
+                        <button id="base64-copy-btn">Copy</button>
+                        <button id="base64-clear-btn" class="btn-secondary">Clear</button>
+                    </div>
+                    <div id="base64-result" class="result-box" style="display: none;"></div>
+                </div>
+            </section>
+
+            <section id="hash-generator" class="tool-section tab-content tab-hash">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">Integrity first</p>
+                        <h2>Hash Generator</h2>
+                    </div>
+                    <p class="section-subtitle">Generate MD5, SHA-1/256/512 in one click.</p>
+                </div>
+                <div class="tool-content">
+                    <div class="form-group">
+                        <label for="hash-input">Text to Hash</label>
+                        <textarea id="hash-input" placeholder="Enter text to generate hash..."></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="hash-generate-btn">Generate Hashes</button>
+                        <button id="hash-clear-btn" class="btn-secondary">Clear</button>
+                    </div>
+
+                    <div class="hash-results">
                         <div class="time-group">
-                            <label>Status</label>
+                            <label>MD5</label>
                             <div class="output-group">
-                                <input type="text" id="http-status" readonly>
-                                <button class="copy-btn" data-target="http-status">Copy</button>
+                                <input type="text" id="hash-md5-result" placeholder="MD5 hash will appear here" readonly>
+                                <button class="copy-btn" data-target="hash-md5-result">Copy</button>
                             </div>
                         </div>
                         <div class="time-group">
-                            <label>Time</label>
+                            <label>SHA-1</label>
                             <div class="output-group">
-                                <input type="text" id="http-time" readonly>
-                                <button class="copy-btn" data-target="http-time">Copy</button>
+                                <input type="text" id="hash-sha1-result" placeholder="SHA-1 hash will appear here" readonly>
+                                <button class="copy-btn" data-target="hash-sha1-result">Copy</button>
+                            </div>
+                        </div>
+                        <div class="time-group">
+                            <label>SHA-256</label>
+                            <div class="output-group">
+                                <input type="text" id="hash-sha256-result" placeholder="SHA-256 hash will appear here" readonly>
+                                <button class="copy-btn" data-target="hash-sha256-result">Copy</button>
+                            </div>
+                        </div>
+                        <div class="time-group">
+                            <label>SHA-512</label>
+                            <div class="output-group">
+                                <input type="text" id="hash-sha512-result" placeholder="SHA-512 hash will appear here" readonly>
+                                <button class="copy-btn" data-target="hash-sha512-result">Copy</button>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label>Response Headers</label>
-                        <pre id="http-response-headers" class="result-box"></pre>
-                        <button class="copy-btn" data-target="http-response-headers">Copy Headers</button>
+                    <div id="hash-result" class="result-box" style="display: none;"></div>
+                </div>
+            </section>
+
+            <section id="diff-checker" class="tool-section tab-content tab-diff">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">Spot differences</p>
+                        <h2>Text Diff Checker</h2>
                     </div>
-                    
+                    <p class="section-subtitle">Color-coded line level comparisons.</p>
+                </div>
+                <div class="tool-content">
                     <div class="form-group">
-                        <label>Response Body</label>
-                        <pre id="http-response-body" class="result-box"></pre>
+                        <label for="diff-original">Original Text</label>
+                        <textarea id="diff-original" placeholder="Paste your original text here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="diff-new">New Text</label>
+                        <textarea id="diff-new" placeholder="Paste your new text here..."></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="diff-compare-btn">Compare</button>
+                        <button id="diff-copy-btn">Copy Result</button>
+                        <button id="diff-clear-btn" class="btn-secondary">Clear</button>
+                    </div>
+                    <div id="diff-result" class="result-box" style="display: none;"></div>
+                </div>
+            </section>
+
+            <section id="json-viewer" class="tool-section tab-content tab-json">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">Structure clarity</p>
+                        <h2>JSON Formatter & Viewer</h2>
+                    </div>
+                    <p class="section-subtitle">Beautify, validate, and copy JSON instantly.</p>
+                </div>
+                <div class="tool-content">
+                    <div class="form-group">
+                        <label for="json-input">Paste your JSON here</label>
+                        <textarea id="json-input" placeholder='{ "hello": "world" }'></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="json-format-btn">Format / Beautify</button>
+                        <button id="json-copy-btn">Copy</button>
+                        <button id="json-clear-btn" class="btn-secondary">Clear</button>
+                    </div>
+                    <pre id="json-output" class="result-box"></pre>
+                </div>
+            </section>
+
+            <section id="markdown-viewer" class="tool-section tab-content tab-markdown">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">Docs preview</p>
+                        <h2>Markdown Viewer</h2>
+                    </div>
+                    <p class="section-subtitle">Live render Markdown into clean HTML.</p>
+                </div>
+                <div class="tool-content">
+                    <div class="form-group">
+                        <label for="markdown-input">Enter Markdown</label>
+                        <textarea id="markdown-input" placeholder="# Hello, Markdown!
+
+- List item
+- **Bold**
+- [Link](https://example.com)"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="markdown-copy-btn">Copy HTML</button>
+                        <button id="markdown-clear-btn" class="btn-secondary">Clear</button>
+                    </div>
+                    <div id="markdown-preview" class="result-box markdown-preview"></div>
+                </div>
+            </section>
+
+            <section id="svg-viewer" class="tool-section tab-content tab-svg">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">Vector sandbox</p>
+                        <h2>SVG Viewer</h2>
+                    </div>
+                    <p class="section-subtitle">Validate and preview SVG snippets with live rendering.</p>
+                </div>
+                <div class="tool-content">
+                    <div class="form-group">
+                        <label for="svg-input">Enter SVG Code</label>
+                        <textarea id="svg-input" placeholder="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;>&#10;  <circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot; fill=&quot;#ffde59&quot; stroke=&quot;#333&quot; stroke-width=&quot;2&quot;/>&#10;</svg>"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="svg-copy-btn">Copy SVG</button>
+                        <button id="svg-clear-btn" class="btn-secondary">Clear</button>
+                    </div>
+                    <div id="svg-preview" class="result-box svg-preview"></div>
+                </div>
+            </section>
+
+            <section id="http-client" class="tool-section tab-content tab-http">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">API friendly</p>
+                        <h2>HTTP Client</h2>
+                    </div>
+                    <p class="section-subtitle">Send requests, inspect responses, and copy headers.</p>
+                </div>
+                <div class="tool-content">
+                    <div class="http-request-section">
+                        <div class="form-group">
+                            <label for="http-method">Method & URL</label>
+                            <div class="method-url-group">
+                                <select id="http-method">
+                                    <option value="GET">GET</option>
+                                    <option value="POST">POST</option>
+                                    <option value="PUT">PUT</option>
+                                    <option value="DELETE">DELETE</option>
+                                    <option value="PATCH">PATCH</option>
+                                    <option value="HEAD">HEAD</option>
+                                    <option value="OPTIONS">OPTIONS</option>
+                                </select>
+                                <input type="text" id="http-url" placeholder="https://api.example.com/endpoint">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Headers</label>
+                            <div id="http-headers-container">
+                                <div class="header-row">
+                                    <input type="text" class="header-key" placeholder="Content-Type">
+                                    <input type="text" class="header-value" placeholder="application/json">
+                                    <button type="button" class="remove-header-btn">×</button>
+                                </div>
+                            </div>
+                            <button type="button" id="add-header-btn" class="btn-secondary">Add Header</button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="http-body-type">Body Type</label>
+                            <select id="http-body-type">
+                                <option value="none">None</option>
+                                <option value="json">JSON</option>
+                                <option value="text">Text</option>
+                                <option value="form">Form Data</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="http-body-group" style="display: none;">
+                            <label for="http-body">Request Body</label>
+                            <textarea id="http-body" placeholder='{"key": "value"}'></textarea>
+                        </div>
+
                         <div class="button-group">
-                            <button id="http-format-response-btn">Format JSON</button>
-                            <button class="copy-btn" data-target="http-response-body">Copy Body</button>
+                            <button id="http-send-btn">Send Request</button>
+                            <button id="http-clear-btn" class="btn-secondary">Clear</button>
                         </div>
                     </div>
-                </div>
-                
-                <div id="http-error" class="result-box" style="display: none;"></div>
-            </div>
-        </section>
 
-        <section id="color-palette" class="tool-section tab-content tab-color">
-            <h2>Color Palette Generator</h2>
-            <div class="tool-content">
-                <div class="color-controls">
-                    <div class="form-group">
-                        <label for="color-input">Base Color</label>
-                        <div class="color-input-group">
-                            <input type="color" id="color-picker" value="#ff6b6b">
-                            <input type="text" id="color-input" placeholder="#ff6b6b" value="#ff6b6b">
-                            <button id="random-color-btn" class="btn-secondary">🎲 Random</button>
+                    <div id="http-response-section" class="http-response-section" style="display: none;">
+                        <div class="section-divider"></div>
+                        <h3>Response</h3>
+
+                        <div class="response-status">
+                            <div class="time-group">
+                                <label>Status</label>
+                                <div class="output-group">
+                                    <input type="text" id="http-status" readonly>
+                                    <button class="copy-btn" data-target="http-status">Copy</button>
+                                </div>
+                            </div>
+                            <div class="time-group">
+                                <label>Time</label>
+                                <div class="output-group">
+                                    <input type="text" id="http-time" readonly>
+                                    <button class="copy-btn" data-target="http-time">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Response Headers</label>
+                            <pre id="http-response-headers" class="result-box"></pre>
+                            <button class="copy-btn" data-target="http-response-headers">Copy Headers</button>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Response Body</label>
+                            <pre id="http-response-body" class="result-box"></pre>
+                            <div class="button-group">
+                                <button id="http-format-response-btn">Format JSON</button>
+                                <button class="copy-btn" data-target="http-response-body">Copy Body</button>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="palette-type">Palette Type</label>
-                        <select id="palette-type">
-                            <option value="monochromatic">Monochromatic</option>
-                            <option value="analogous">Analogous</option>
-                            <option value="complementary">Complementary</option>
-                            <option value="triadic">Triadic</option>
-                            <option value="tetradic">Tetradic</option>
-                            <option value="split-complementary">Split Complementary</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="color-count">Number of Colors</label>
-                        <input type="range" id="color-count" min="3" max="12" value="5">
-                        <span id="color-count-display">5</span>
-                    </div>
-                </div>
-                
-                <div class="button-group">
-                    <button id="generate-palette-btn">Generate Palette</button>
-                    <button id="export-palette-btn" class="btn-secondary">Export CSS</button>
-                    <button id="clear-palette-btn" class="btn-secondary">Clear</button>
-                </div>
-                
-                <div id="color-palette-result" class="color-palette-result" style="display: none;">
-                    <h3>Generated Palette</h3>
-                    <div id="palette-colors" class="palette-colors"></div>
-                    
-                    <div class="color-details">
-                        <h4>Color Details</h4>
-                        <div id="color-details-container" class="color-details-container"></div>
-                    </div>
-                    
-                    <div class="accessibility-check">
-                        <h4>Accessibility Check</h4>
-                        <div id="accessibility-results" class="accessibility-results"></div>
-                    </div>
-                </div>
-                
-                <div id="color-error" class="result-box" style="display: none;"></div>
-            </div>
-        </section>
 
-        <section id="html-viewer" class="tool-section tab-content tab-html">
-            <h2>HTML Viewer & Preview</h2>
-            <div class="tool-content">
-                <div class="form-group">
-                    <label for="html-input">Enter HTML Code</label>
-                    <textarea id="html-input" placeholder="<html>&#10;<head>&#10;  <title>My Page</title>&#10;</head>&#10;<body>&#10;  <h1>Hello World!</h1>&#10;  <p>This is a sample HTML page.</p>&#10;</body>&#10;</html>"></textarea>
+                    <div id="http-error" class="result-box" style="display: none;"></div>
                 </div>
-                <div class="button-group">
-                    <button id="html-copy-btn">Copy HTML</button>
-                    <button id="html-clear-btn" class="btn-secondary">Clear</button>
-                </div>
-                <div id="html-preview" class="result-box html-preview"></div>
-            </div>
-        </section>
-    </main>
+            </section>
 
-    <footer>
-        <p>&copy; 2024 Happy Utils. All rights reserved.</p>
-    </footer>
+            <section id="color-palette" class="tool-section tab-content tab-color">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">Brand ready</p>
+                        <h2>Color Palette Generator</h2>
+                    </div>
+                    <p class="section-subtitle">Craft accessible palettes with live contrast scores.</p>
+                </div>
+                <div class="tool-content">
+                    <div class="color-controls">
+                        <div class="form-group">
+                            <label for="color-input">Base Color</label>
+                            <div class="color-input-group">
+                                <input type="color" id="color-picker" value="#ff6b6b">
+                                <input type="text" id="color-input" placeholder="#ff6b6b" value="#ff6b6b">
+                                <button id="random-color-btn" class="btn-secondary">🎲 Random</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="palette-type">Palette Type</label>
+                            <select id="palette-type">
+                                <option value="monochromatic">Monochromatic</option>
+                                <option value="analogous">Analogous</option>
+                                <option value="complementary">Complementary</option>
+                                <option value="triadic">Triadic</option>
+                                <option value="tetradic">Tetradic</option>
+                                <option value="split-complementary">Split Complementary</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color-count">Number of Colors</label>
+                            <input type="range" id="color-count" min="3" max="12" value="5">
+                            <span id="color-count-display">5</span>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="generate-palette-btn">Generate Palette</button>
+                        <button id="export-palette-btn" class="btn-secondary">Export CSS</button>
+                        <button id="clear-palette-btn" class="btn-secondary">Clear</button>
+                    </div>
+
+                    <div id="color-palette-result" class="color-palette-result" style="display: none;">
+                        <h3>Generated Palette</h3>
+                        <div id="palette-colors" class="palette-colors"></div>
+
+                        <div class="color-details">
+                            <h4>Color Details</h4>
+                            <div id="color-details-container" class="color-details-container"></div>
+                        </div>
+
+                        <div class="accessibility-check">
+                            <h4>Accessibility Check</h4>
+                            <div id="accessibility-results" class="accessibility-results"></div>
+                        </div>
+                    </div>
+
+                    <div id="color-error" class="result-box" style="display: none;"></div>
+                </div>
+            </section>
+
+            <section id="html-viewer" class="tool-section tab-content tab-html">
+                <div class="section-header">
+                    <div>
+                        <p class="section-eyebrow">Markup lab</p>
+                        <h2>HTML Viewer & Preview</h2>
+                    </div>
+                    <p class="section-subtitle">Experiment with HTML snippets in a safe sandbox.</p>
+                </div>
+                <div class="tool-content">
+                    <div class="form-group">
+                        <label for="html-input">Enter HTML Code</label>
+                        <textarea id="html-input" placeholder="<html>&#10;<head>&#10;  <title>My Page</title>&#10;</head>&#10;<body>&#10;  <h1>Hello World!</h1>&#10;  <p>This is a sample HTML page.</p>&#10;</body>&#10;</html>"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button id="html-copy-btn">Copy HTML</button>
+                        <button id="html-clear-btn" class="btn-secondary">Clear</button>
+                    </div>
+                    <div id="html-preview" class="result-box html-preview"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Happy Utils · Crafted with vanilla HTML, CSS, and JavaScript.</p>
+        </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
+
